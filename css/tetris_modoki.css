@@ -5,6 +5,73 @@
  * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/* waya0125.com より移植 */
+
+body {
+    position: relative;
+    text-align: center;
+    -ms-user-select: none;/* none:選択させない / all:すべてを強制的に選択させる(部分的ではない) / text:ユーザーが直接選択したものを選択できるようにする */
+    -webkit-user-select: none;
+    user-select: none;
+    line-break: normal;/* auto:禁則処理を行わない / loose:最低限の禁則処理 / normal:一般的な禁則処理ルールを適用 / strict:細かな禁則処理うルールを適用 */
+    word-wrap: normal;
+}
+
+.body_tetris {
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.position-left {
+    position: sticky;
+    left: 0;
+}
+
+.position-right {
+    position: sticky;
+    right: 0;
+}
+
+.position-center {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+
+/* idにdisplayが含まれている場合
+ * displayを判定に含ませてbrしなくてもいいようにする
+ */
+[id*="display"] {
+    display: block;
+}
+
+/* idにbuttonsが含まれている場合
+ * buttonsを判定に含ませてbrしなくてもいいようにする
+ */
+[id*="buttons"] {
+    display: block;
+    padding-top: 34em;
+}
+
+.test {
+    display: block;
+}
+
+/* ここまで waya0125.com からの移植・構文改変 */
+
 *{
     padding: 0;
     margin: 0;
