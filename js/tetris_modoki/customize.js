@@ -452,8 +452,14 @@ soundDelete.volume = 0.1;
 let soundSet = new Audio();
 soundSet.src = '../../audio/tetris_Set.ogg';
 soundSet.volume = 0.1;
+// 一時停止音
+let soundPause = new Audio();
+soundPause.src = '../../audio/tetris_Pause.ogg';
+soundPause.volume = 0.1;
 
-// ボタンクリックイベント
+/* ボタンクリックイベント
+ * ボタンを押したときに実行
+ */
 
 /* 一時停止ボタン
  * 一時停止する
@@ -466,7 +472,14 @@ document.getElementById("playing").addEventListener("click", function() {
     // trueとfalseの切り替え (否定演算子を使用)
     playingState = !playingState;
 
-    soundBGM.play();
+    if(playingState) {
+        soundPause.currentTime = 0;
+        soundPause.play().then(r => r).catch(e => e); // エラーを無視
+        soundBGM.pause();
+    }
+    else {
+        soundBGM.play().then(r => r).catch(e => e); // エラーを無視
+    }
 
     // ボタンのテキストを切り替え
     document.getElementById("playingState").textContent = playingState ? "一時停止" : "再生";
