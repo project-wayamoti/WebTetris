@@ -16,6 +16,14 @@ body {
     line-break: normal;/* auto:禁則処理を行わない / loose:最低限の禁則処理 / normal:一般的な禁則処理ルールを適用 / strict:細かな禁則処理うルールを適用 */
     word-wrap: normal;
 }
+table {
+    /* 中央に寄せる */
+    margin-left: auto;
+    margin-right: auto;
+
+    border-collapse: collapse;/* collapse:セルの境界線を重ねる / separate:セルの境界線を分ける */
+    border-spacing: 0;/* セルの境界線の間隔 */
+}
 .text-align-left {
     text-align: left;
 }
