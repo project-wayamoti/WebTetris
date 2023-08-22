@@ -383,9 +383,6 @@ let blockGenerate = function() {
     block.x = 4;
     block.y = 0;
     block.status = 0;
-
-    // 次のブロックを表示
-    nextBlockViewer();
 };
 
 let nextBlockViewer = function() {
@@ -437,7 +434,11 @@ let tick = function() {
  * 1000ms = 1s
  */
 let loop = function() {
+    // ブロックを動かす
     blockMove();
+
+    // 次のブロックを表示
+    nextBlockViewer();
 
     document.getElementById("score").textContent = score;
     document.getElementById("level").textContent = level;
