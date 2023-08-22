@@ -371,7 +371,11 @@ let blockGenerate = function() {
             cnt++;
             if(fieldRAM[i][j] === cell.none) break;
         }
-        if(cnt === fieldWidth) deleteLine(i);
+        if(cnt === fieldWidth) {
+            deleteLine(i);
+            lines++;
+            score += 40 * level;
+        }
     }
 
     // 次のブロックを登録
