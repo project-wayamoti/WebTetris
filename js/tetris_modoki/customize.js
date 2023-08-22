@@ -387,6 +387,18 @@ let blockGenerate = function() {
             soundGameOver.currentTime = 0;
             soundGameOver.play().then(r => r).catch(e => e); // エラーを無視
 
+            soundGameOver.addEventListener('ended', (event) => {
+                // ハイスコア音の再生
+                soundHighScoreStart.currentTime = 0;
+                soundHighScoreStart.play().then(r => r).catch(e => e); // エラーを無視
+
+                soundHighScoreStart.addEventListener('ended', (event) => {
+                    // ハイスコアループ音の再生
+                    soundHighScoreLoop.currentTime = 0;
+                    soundHighScoreLoop.play().then(r => r).catch(e => e); // エラーを無視
+                });
+            });
+
             // ゲームオーバー
             gameOver = true;
             playingState = true;
@@ -503,6 +515,14 @@ soundSet.volume = 0.3;
 let soundPause = new Audio();
 soundPause.src = '../../audio/tetris_Pause.ogg';
 soundPause.volume = 0.1;
+// ハイスコア（未実装だけどゲームオーバー後に流しておく）
+let soundHighScoreStart = new Audio();
+soundHighScoreStart.src = '../../audio/tetris_HighScore_Start.ogg';
+soundHighScoreStart.volume = 0.3;
+let soundHighScoreLoop = new Audio();
+soundHighScoreLoop.src = '../../audio/tetris_HighScore_Loop.ogg';
+soundHighScoreLoop.loop = true;
+soundHighScoreLoop.volume = 0.3;
 
 /* ボタンクリックイベント
  * ボタンを押したときに実行
