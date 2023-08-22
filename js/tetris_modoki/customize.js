@@ -420,9 +420,6 @@ let blockGenerate = function() {
 };
 
 let nextBlockViewer = function() {
-    // 一時停止中なら動かさない
-    if(playingState) return false;
-
     // 出力場所の要素を取得
     let d = document.getElementById("nextBlockViewer");
 
@@ -563,6 +560,9 @@ document.getElementById("playing").addEventListener("click", function() {
  * 1回転ごとにstatusを引いていく
  */
 document.getElementById("rotate").addEventListener("click", function() {block.status++;
+    // 一時停止中なら動かさない
+    if(playingState) return false;
+
     soundRotate.currentTime = 0;
     soundRotate.play().then(r => r).catch(e => e); // エラーを無視
 
