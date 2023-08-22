@@ -491,19 +491,19 @@ soundBGM.volume = 0.1;
 // 回転音
 let soundRotate = new Audio();
 soundRotate.src = '../../audio/tetris_Rotate.ogg';
-soundRotate.volume = 0.1;
+soundRotate.volume = 0.3;
 // ゲームオーバー
 let soundGameOver = new Audio();
 soundGameOver.src = '../../audio/tetris_GameOver.ogg';
-soundGameOver.volume = 0.1;
+soundGameOver.volume = 0.3;
 // 削除音
 let soundDelete = new Audio();
 soundDelete.src = '../../audio/tetris_Delete.ogg';
-soundDelete.volume = 0.1;
+soundDelete.volume = 0.3;
 // 設置音
 let soundSet = new Audio();
 soundSet.src = '../../audio/tetris_Set.ogg';
-soundSet.volume = 0.1;
+soundSet.volume = 0.3;
 // 一時停止音
 let soundPause = new Audio();
 soundPause.src = '../../audio/tetris_Pause.ogg';
