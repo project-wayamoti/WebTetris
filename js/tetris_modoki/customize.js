@@ -421,6 +421,12 @@ let nextBlockViewer = function() {
     d.innerHTML = s;
 }
 
+let tick = function() {
+    let base = 1000;
+    if(level === 1) return base;
+    base -= level * 30;
+}
+
 /**
  * メインループ
  * 1秒経過するごとに実行
@@ -437,7 +443,7 @@ let loop = function() {
     if(level < 10) if(score / 2000 > level) level++;
 
     // 1秒経過するごとに実行
-    setTimeout(loop, 1000);
+    setTimeout(loop, 1000 - ((level - 1) * 30));
 };
 
 /* 音声ファイルの読み込み
