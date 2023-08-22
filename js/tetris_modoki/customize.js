@@ -376,8 +376,6 @@ let blockGenerate = function() {
     block.y = 0;
     block.status = 0;
 
-    document.getElementById("nextBlockViewer").textContent = block.type;
-
     // 次のブロックを表示
     nextBlockViewer();
 };
