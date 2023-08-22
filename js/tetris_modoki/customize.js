@@ -524,13 +524,16 @@ document.getElementById("playing").addEventListener("click", function() {
     // trueとfalseの切り替え (否定演算子を使用)
     playingState = !playingState;
 
-    if(playingState) {
+    if(playingState && !gameOver) {
         soundPause.currentTime = 0;
         soundPause.play().then(r => r).catch(e => e); // エラーを無視
         soundBGM.pause();
     }
-    else {
+    else if (!playingState && !gameOver) {
         soundBGM.play().then(r => r).catch(e => e); // エラーを無視
+    }
+    else if (gameOver) {
+        location.reload();
     }
 
     // ボタンのテキストを切り替え
