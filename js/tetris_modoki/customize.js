@@ -14,8 +14,10 @@ function Block(x, y, type) {
 
 const block = new Block(4, 0, Math.floor(Math.random() * (7)));
 let fps = 1000 / 60;   // 60fps
-let fieldWidth = 12;  // フィールドの幅
-let fieldHeight = 18; // フィールドの高さ
+let fieldWidth = 12;   // フィールドの幅
+let fieldHeight = 18;  // フィールドの高さ
+let currentBlock = 1;  // 現在のブロック
+let nextBlock = Math.floor(Math.random() * (7)); // 次のブロック
 let playingState = true; // 再生を止めるか否か (true: 一時停止, false: 再生)
 
 // ブロックの種類
@@ -343,6 +345,14 @@ let blockGenerate = function() {
     // 一時停止中なら動かさない
     if(playingState) return false;
 
+    // 現在のブロックを格納する変数
+    currentBlock = nextBlock;
+    document.getElementById("currentBlock").textContent = currentBlock;
+
+    // 次のブロックを格納する変数
+    nextBlock = Math.floor(Math.random() * (7));
+    document.getElementById("nextBlock").textContent = nextBlock;
+
     // 設置音の再生
     soundSet.currentTime = 0;
     soundSet.play().then(r => r).catch(e => e); // エラーを無視
@@ -361,7 +371,7 @@ let blockGenerate = function() {
     }
 
     // 次のブロックを登録
-    block.type = Math.floor(Math.random() * (7));
+    block.type = currentBlock;
     block.x = 4;
     block.y = 0;
     block.status = 0;
@@ -381,9 +391,6 @@ let nextBlockViewer = function() {
 
     // nextBlockViewerへ書き込むhtmlを格納する変数
     let s = "";
-
-    // 次出るブロックを取得
-    let nextBlock = block.type;
 
     // 次出るブロックを描画
     s = "<img src='";
