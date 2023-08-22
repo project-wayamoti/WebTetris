@@ -328,7 +328,8 @@ let deleteLine = function(y) {
     if(playingState) return false;
 
     // 消す音の再生
-    soundDelete.play();
+    soundDelete.currentTime = 0;
+    soundDelete.play().then(r => r).catch(e => e); // エラーを無視
 
     for(let i = y; i > 0; i--) {
         for(let j = 1; j < fieldWidth - 1; j++) {
@@ -343,7 +344,8 @@ let blockGenerate = function() {
     if(playingState) return false;
 
     // 設置音の再生
-    soundSet.play();
+    soundSet.currentTime = 0;
+    soundSet.play().then(r => r).catch(e => e); // エラーを無視
 
     // fieldに固定
     copy(blocks[block.type][block.status], fieldRAM, 0, 0, block.x, block.y, 0);
@@ -420,7 +422,15 @@ let loop = function() {
     setTimeout(loop, 1000);
 };
 
-// 音声ファイルの読み込み
+/* 音声ファイルの読み込み
+ * 自動再生時ブラウザがブロックするため、ボタンを押したときに実行する
+ * https://developer.mozilla.org/ja/docs/Web/Media/Autoplay_guide
+ *
+ * サウンドを連続再生したときに音が重ならず単独で再生されてしまうので
+ * これを回避するため再生前にcurrentTimeを0にする
+ *
+ * BGM by https://www.youtube.com/playlist?list=PLKkxnBwFOJGIu3XSOHYW4r9dFyaoC9zNW
+ */
 // MainBGM
 let soundBGM = new Audio();
 soundBGM.src = '../../audio/tetris_PlayingBGM.ogg';
@@ -465,7 +475,9 @@ document.getElementById("playing").addEventListener("click", function() {
  * 1回転ごとにstatusを引いていく
  */
 document.getElementById("rotate").addEventListener("click", function() {block.status++;
-    soundRotate.play();
+    soundRotate.currentTime = 0;
+    soundRotate.play().then(r => r).catch(e => e); // エラーを無視
+
     if(block.status > blockStatus[block.type]) block.status = 0;
     if(!setBlockCheck(block.type, block.status, block.x, block.y)){
         block.status--;
@@ -546,7 +558,11 @@ window.addEventListener(
             case "KeyZ":
                 // 左に回転させる
                 rotateKey = !rotateKey;
-                soundRotate.play();
+
+                // 回転音の再生
+                soundRotate.currentTime = 0;
+                soundRotate.play().then(r => r).catch(e => e); // エラーを無視
+
                 // 左に回転できるなら回転する
                 block.status--;
                 if(block.status < 0) block.status = blockStatus[block.type];
@@ -560,7 +576,11 @@ window.addEventListener(
             case "ArrowUp":
                 // 右に回転させる
                 rotateKey = !rotateKey;
-                soundRotate.play();
+
+                // 回転音の再生
+                soundRotate.currentTime = 0;
+                soundRotate.play().then(r => r).catch(e => e); // エラーを無視
+
                 // 右に回転できるなら回転する
                 block.status++;
                 if(block.status > blockStatus[block.type]) block.status = 0;
