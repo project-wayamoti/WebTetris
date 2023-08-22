@@ -33,7 +33,11 @@ table {
 .text-align-center {
     text-align: center;
 }
-
+.position-center {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
+}
 /* ここまで waya0125.com からの移植・構文改変 */
 
 /* Tetris 表示領域 */
