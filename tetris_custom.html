@@ -18,12 +18,8 @@
         <meta property="og:url" content="">
         <meta property="og:image" content="">
 
-        <link rel="manifest" href="site.webmanifest">
-        <link rel="apple-touch-icon" href="icon.png">
         <!-- Place favicon.ico in the root directory -->
 
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/tetris_modoki.css">
 
         <meta name="theme-color" content="#fafafa">
@@ -32,6 +28,7 @@
     <body>
         <h1>README</h1>
         <p>テトリスのようなゲームです。</p>
+        <p>※ 最初のブロックだけ表示されません。※</p>
         <h1>操作方法</h1>
         <table>
             <tr>
@@ -66,20 +63,20 @@
 
         <br>
 
-        <div id="playingState">再生中</div>
+        <h2><div id="playingState">停止中</div></h2>
 
         <br>
 
-        <div class="tetris">
+        <div class="tetris resize">
             <div id="tetriminoDraw"></div>
             <div id="tetriminoScore">
-                <div id="nextBlockViewer"></div>
                 <div class="scoreTitle gbFont">SCORE</div>
                 <div id="score" class="gbFont">0</div>
                 <div class="levelTitle gbFont">LEVEL</div>
                 <div id="level" class="gbFont">1</div>
                 <div class="linesTitle gbFont">LINES</div>
                 <div id="lines" class="gbFont">0</div>
+                <div id="nextBlockViewer"></div>
             </div>
         </div>
 
@@ -92,15 +89,6 @@
             <input type="button" id="down" value="↓">
         </div>
 
-        <div class="background" style="background: #0a53be; margin-left: 1000em;">
-        </div>
-
-        hoge huga<br>
-
-        <script src="js/tetris_modoki/customize.js"></script>
-
-        <script src="js/vendor/modernizr-3.11.2.min.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
+        <script src="js/tetris_modoki/main.js"></script>
     </body>
 </html>
