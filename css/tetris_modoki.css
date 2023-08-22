@@ -5,8 +5,10 @@
  * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/* TTFフォントを読み込む - https://thinkit.co.jp/story/2011/08/18/2233 */
 @font-face {
     font-family: 'EarlyGameBoy';
+    /* Early GameBoy - https://www.dafont.com/early-gameboy.font */
     src: url('../font/EarlyGameBoy.ttf') format('truetype');
 }
 
@@ -54,11 +56,11 @@ table {
     padding-left: 3%;
 }
 #score {
-    padding-top: 13%;
+    padding-top: 11%;
     padding-left: 3%;
 }
 .levelTitle {
-    padding-top: 28%;
+    padding-top: 25%;
     padding-left: 3%;
 }
 #level {
@@ -66,7 +68,7 @@ table {
     padding-left: 3%;
 }
 .linesTitle {
-    padding-top: 13.5%;
+    padding-top: 11%;
     padding-left: 3%;
 }
 #lines {
@@ -80,6 +82,7 @@ table {
     height: auto;
     display: flex;
     position: absolute;
+    top: 42.5%;
     left: 50%;
     transform: translate(-50%,0);
     background-color: #8DAD30;
@@ -99,32 +102,32 @@ table {
 
 /* ゲーム画面表示場所の大きさとか */
 .BoxI {
-    padding-left: 10%;
-    padding-top: 186%;
+    padding-left: 15%;
+    padding-top: 28%;
 }
 .BoxT {
     padding-left: 15%;
-    padding-top: 200%;
+    padding-top: 45%;
 }
 .BoxO {
     padding-left: 15%;
-    padding-top: 200%;
+    padding-top: 42.5%;
 }
 .BoxZ {
     padding-left: 15%;
-    padding-top: 200%;
+    padding-top: 42.5%;
 }
 .BoxS {
     padding-left: 15%;
-    padding-top: 200%;
+    padding-top: 42.5%;
 }
 .BoxL {
     padding-left: 15%;
-    padding-top: 192.5%;
+    padding-top: 35%;
 }
 .BoxJ {
     padding-left: 15%;
-    padding-top: 192.5%;
+    padding-top: 35%;
 }
 
 #tetriminoScore {
@@ -158,6 +161,9 @@ table {
 }
 
 /* 外側の壁用のマスの色(灰色) */
+.gameOver {
+    background-image: url(../img/svg/tetris_GameOver.svg);
+}
 .wall1 {
     background-image: url(../img/svg/tetris_Block1.svg);
 }
