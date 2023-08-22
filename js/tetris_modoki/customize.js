@@ -539,6 +539,7 @@ document.getElementById("up").addEventListener("click", function() {
         block.y++;
     }
     blockGenerate();
+    score += 5 * level;
 });
 /* 右移動ボタン
  * 右に動かせるなら動かす
@@ -578,6 +579,7 @@ window.addEventListener(
                     block.y++;
                 }
                 blockGenerate();
+                score += 5 * level;
                 break;
             // ソフトドロップ
             case "KeyS":
