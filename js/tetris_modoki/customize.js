@@ -503,10 +503,14 @@ soundRotate.volume = 0.3;
 let soundGameOver = new Audio();
 soundGameOver.src = '../../audio/tetris_GameOver.ogg';
 soundGameOver.volume = 0.3;
-// 削除音
+// 通常削除音
 let soundDelete = new Audio();
 soundDelete.src = '../../audio/tetris_Delete.ogg';
 soundDelete.volume = 0.3;
+// 4本削除音
+let soundDelete4Line = new Audio();
+soundDelete4Line.src = '../../audio/tetris_Delete4Line.ogg';
+soundDelete4Line.volume = 0.3;
 // 設置音
 let soundSet = new Audio();
 soundSet.src = '../../audio/tetris_Set.ogg';
