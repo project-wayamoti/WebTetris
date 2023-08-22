@@ -403,8 +403,9 @@ let blockGenerate = function() {
             gameOver = true;
             playingState = true;
 
-            // ゲームオーバー
-            alert("ゲームオーバー");
+            // ゲームオーバー画面を表示
+            document.getElementById("playingState").textContent = "ゲームオーバー";
+            alert("ゲームオーバー\nスコア: " + score + "\nレベル: " + level + "\nライン: " + lines);
         }
     }
 
