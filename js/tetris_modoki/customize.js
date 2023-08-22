@@ -18,6 +18,10 @@ let fieldWidth = 12;   // フィールドの幅
 let fieldHeight = 18;  // フィールドの高さ
 let currentBlock = 1;  // 現在のブロック
 let nextBlock = Math.floor(Math.random() * (7)); // 次のブロック
+let level = 1;         // レベル
+let score = 0;         // スコア
+let lines = 0;         // 消したライン数
+let combo = 0;         // コンボ数
 let playingState = true; // 再生を止めるか否か (true: 一時停止, false: 再生)
 
 // ブロックの種類
@@ -424,6 +428,15 @@ let nextBlockViewer = function() {
  */
 let loop = function() {
     blockMove();
+
+    document.getElementById("score").textContent = score;
+    document.getElementById("level").textContent = level;
+    document.getElementById("lines").textContent = lines;
+    document.getElementById("combo").textContent = combo;
+
+    if(level < 10) if(score / 2000 > level) level++;
+
+    // 1秒経過するごとに実行
     setTimeout(loop, 1000);
 };
 
