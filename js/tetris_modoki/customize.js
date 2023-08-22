@@ -23,6 +23,7 @@ let score = 0;         // スコア
 let lines = 0;         // 消したライン数
 let combo = 0;         // コンボ数
 let playingState = true; // 再生を止めるか否か (true: 一時停止, false: 再生)
+let gameOver = false;  // ゲームオーバーか否か
 
 // ブロックの種類
 let cell = {
@@ -30,6 +31,7 @@ let cell = {
     wall1 : 1,
     wall2 : 2,
     wall3 : 3,
+    GameOver : 4,
     I : 10,
     O : 11,
     S : 12,
@@ -375,6 +377,29 @@ let blockGenerate = function() {
             deleteLine(i);
             lines++;
             score += 40 * level;
+        }
+    }
+
+    // ゲームオーバー判定
+    for(let i = 1; i < fieldWidth - 1; i++) {
+        if(fieldRAM[0][i] !== cell.none) {
+            // 一度実行したら実行しない
+            if(gameOver) return false;
+
+            // BGMを止める
+            soundGameOver.currentTime = 0;
+            soundBGM.pause();
+
+            // ゲームオーバー音の再生
+            soundGameOver.currentTime = 0;
+            soundGameOver.play().then(r => r).catch(e => e); // エラーを無視
+
+            // ゲームオーバー
+            gameOver = true;
+            playingState = true;
+
+            // ゲームオーバー
+            alert("ゲームオーバー");
         }
     }
 
