@@ -14,13 +14,16 @@ function Block(x, y, type) {
 
 const block = new Block(4, 0, Math.floor(Math.random() * (7)));
 let fps = 1000 / 60;   // 60fps
-let fieldWidth = 11;  // フィールドの幅
+let fieldWidth = 12;  // フィールドの幅
 let fieldHeight = 18; // フィールドの高さ
+let playingState = false; // 再生を止めるか否か
 
 // ブロックの種類
 let cell = {
     none : 0,
-    wall : 1,
+    wall1 : 1,
+    wall2 : 2,
+    wall3 : 3,
     I : 10,
     O : 11,
     S : 12,
@@ -37,47 +40,47 @@ let cnt = 0;
  */
 const viewRAM = [
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+    [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+    [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+    [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+    [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+    [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+    [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 1]
 ];
 
 // ゲームを管理するためのフィールド
 const fieldRAM = [
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+    [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+    [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+    [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+    [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+    [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+    [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 1]
 ];
 
 /** 各ブロックの状態の数<br>
@@ -279,7 +282,9 @@ let draw = function() {
         for(let j = 0; j < fieldWidth; j++) {
             s += "<div class='cell ";
             switch(viewRAM[i][j]) {
-                case cell.wall: s += "wall"; break;
+                case cell.wall1: s += "wall1"; break;
+                case cell.wall2: s += "wall2"; break;
+                case cell.wall3: s += "wall3"; break;
                 case cell.I: s += "I"; break;
                 case cell.O: s += "O"; break;
                 case cell.S: s += "S"; break;
@@ -306,6 +311,7 @@ let graph = function() {
 
 // 下に動かせるか判定
 let blockMove = function() {
+    if(playingState) return; // 一時停止中なら動かさない
     // 下に動かせるか？ このとき y 座標を +1 して判定
     if(setBlockCheck(block.type, block.status, block.x, block.y + 1)) {
         block.y++; // 動かせるなら動かす
@@ -317,6 +323,11 @@ let blockMove = function() {
 
 // 行列が埋まったら埋まった行を消して消えた分ブロックを下げる
 let deleteLine = function(y) {
+    if(playingState) return; // 一時停止中なら動かさない
+
+    // 消す音の再生
+    soundDelete();
+
     for(let i = y; i > 0; i--) {
         for(let j = 1; j < fieldWidth - 1; j++) {
             fieldRAM[i][j] = fieldRAM[i-1][j];
@@ -326,6 +337,9 @@ let deleteLine = function(y) {
 
 // 動かせなくなったら次のブロックを登録
 let blockGenerate = function() {
+    // 設置音の再生
+    soundSet();
+
     // fieldに固定
     copy(blocks[block.type][block.status], fieldRAM, 0, 0, block.x, block.y, 0);
 
@@ -344,7 +358,49 @@ let blockGenerate = function() {
     block.x = 4;
     block.y = 0;
     block.status = 0;
+
+    document.getElementById("nextBlockViewer").textContent = block.type;
+
+    // 次のブロックを表示
+    nextBlockViewer();
 };
+
+let nextBlockViewer = function() {
+    // 出力場所の要素を取得
+    let d = document.getElementById("nextBlockViewer");
+
+    // nextBlockViewerへ書き込むhtmlを格納する変数
+    let s = "";
+
+    // 次出るブロックを取得
+    let nextBlock = block.type;
+
+    // 次出るブロックを描画
+    s = "<img src='";
+    switch(nextBlock) {
+        case 0: s += "img/png/tetris_BoxI.png"; break;
+        case 1: s += "img/png/tetris_BoxO.png"; break;
+        case 2: s += "img/png/tetris_BoxS.png"; break;
+        case 3: s += "img/png/tetris_BoxZ.png"; break;
+        case 4: s += "img/png/tetris_BoxJ.png"; break;
+        case 5: s += "img/png/tetris_BoxL.png"; break;
+        case 6: s += "img/png/tetris_BoxT.png"; break;
+    }
+    s += "' id='nextBlockViewerImg' class='tetriminoNext ";
+    switch(nextBlock) {
+        case 0: s += "BoxI"; break;
+        case 1: s += "BoxO"; break;
+        case 2: s += "BoxS"; break;
+        case 3: s += "BoxZ"; break;
+        case 4: s += "BoxJ"; break;
+        case 5: s += "BoxL"; break;
+        case 6: s += "BoxT"; break;
+    }
+    s += "'>";
+
+    // 要素に書き込み
+    d.innerHTML = s;
+}
 
 /**
  * メインループ
@@ -357,12 +413,65 @@ let loop = function() {
     setTimeout(loop, 1000);
 };
 
+let soundBGM = function() {
+    let BGM = new Audio();
+    BGM.src = '../../audio/tetris_PlayingBGM.ogg';
+    BGM.loop = true;
+    BGM.autoplay = true;
+    BGM.volume = 0.1;
+    BGM.play();
+}
+
+let soundGameOver = function() {
+    let GameOver = new Audio();
+    GameOver.src = '../../audio/tetris_GameOver.ogg';
+    GameOver.volume = 0.1;
+    GameOver.play();
+}
+
+let soundRotate = function() {
+    let Rotate = new Audio();
+    Rotate.src = '../../audio/tetris_Rotate.ogg';
+    Rotate.volume = 0.1;
+    Rotate.play();
+}
+
+let soundDelete = function() {
+    let Delete = new Audio();
+    Delete.src = '../../audio/tetris_Delete.ogg';
+    Delete.volume = 0.1;
+    Delete.play();
+}
+
+let soundSet = function() {
+    let Set = new Audio();
+    Set.src = '../../audio/tetris_Set.ogg';
+    Set.volume = 0.1;
+    Set.play();
+}
+
 // ボタンクリックイベント
 
-/** 回転ボタン
+/* 一時停止ボタン
+ * 一時停止する
+ * playingStateがtrueなら一時停止する
+ * playingStateがfalseなら再生する
+ * playingStateの初期値はfalse
+ * Powered by http://javascript123.seesaa.net/article/108875442.html
+ */
+document.getElementById("playing").addEventListener("click", function() {
+    // trueとfalseの切り替え (否定演算子を使用)
+    playingState = !playingState;
+
+    // ボタンのテキストを切り替え
+    document.getElementById("playingState").textContent = playingState ? "再生" : "一時停止";
+});
+
+/* 回転ボタン
  * 1回転ごとにstatusを引いていく
  */
 document.getElementById("rotate").addEventListener("click", function() {block.status++;
+    soundRotate();
     if(block.status > blockStatus[block.type]) block.status = 0;
     if(!setBlockCheck(block.type, block.status, block.x, block.y)){
         block.status--;
@@ -370,14 +479,14 @@ document.getElementById("rotate").addEventListener("click", function() {block.st
     }
 });
 
-/** 左移動ボタン
+/* 左移動ボタン
  * 左に動かせるなら動かす
  */
 document.getElementById("left").addEventListener("click", function() {
     if(setBlockCheck(block.type, block.status, block.x - 1, block.y)) block.x--;
 });
 
-/** 上移動ボタン
+/* 上移動ボタン
  * 上に動かせるなら動かす
  */
 document.getElementById("up").addEventListener("click", function() {
@@ -387,14 +496,14 @@ document.getElementById("up").addEventListener("click", function() {
     blockGenerate();
 });
 
-/** 右移動ボタン
+/* 右移動ボタン
  * 右に動かせるなら動かす
  */
 document.getElementById("right").addEventListener("click", function() {
     if(setBlockCheck(block.type, block.status, block.x + 1, block.y)) block.x++;
 });
 
-/** 下移動ボタン
+/* 下移動ボタン
  * 下に動かせるなら動かす
  */
 document.getElementById("down").addEventListener("click", function() {
@@ -403,7 +512,7 @@ document.getElementById("down").addEventListener("click", function() {
 
 let rotateKey = true;
 
-/** キーボードイベント
+/* キーボードイベント
  * キーを押したときに実行
  * 旧式のキーコードでは非推奨になっていたためこれをcodeで置き換えた
  * https://developer.mozilla.org/ja/docs/Web/API/KeyboardEvent/code
@@ -442,8 +551,8 @@ window.addEventListener(
                 break;
             case "KeyQ":
                 // 左に回転させる
-                if(!rotateKey) break;
-                rotateKey = false;
+                rotateKey = !rotateKey;
+                soundRotate();
                 // 左に回転できるなら回転する
                 block.status--;
                 if(block.status < 0) block.status = blockStatus[block.type];
@@ -454,8 +563,8 @@ window.addEventListener(
                 break;
             case "KeyE":
                 // 右に回転させる
-                if(!rotateKey) break;
-                rotateKey = false;
+                rotateKey = !rotateKey;
+                soundRotate();
                 // 右に回転できるなら回転する
                 block.status++;
                 if(block.status > blockStatus[block.type]) block.status = 0;
@@ -468,6 +577,13 @@ window.addEventListener(
     },
     true,
 );
+
+/* Windowの読み込み完了時に実行
+ * BGMを再生
+ */
+window.addEventListener("load",function() {
+    soundBGM();
+});
 
 setInterval(graph, fps);
 loop(); // メインループを実行
