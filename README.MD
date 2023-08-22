@@ -1,8 +1,8 @@
-# Web TETRIS for HTML5 Boilerplate & Bootstrap
+# Web TETRIS
 
 ## Description
 
-This is a simple Tetris game for [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate) & [Bootstrap](https://github.com/twbs/bootstrap). It is based on the [Tetris game]()
+This is a simple Tetris game. It is based on the [Tetris game](https://github.com/ophum/tetris)
 
 ## Installation
 
@@ -12,7 +12,14 @@ This is a simple Tetris game for [HTML5 Boilerplate](https://github.com/h5bp/htm
 
 ## Usage
 
-Making now...
+| Key     | Action       |
+|:--------|:-------------|
+| A/←     | Move Left    |
+| D/→     | Move Right   |
+| W/Space | hard drop    |
+| S/↓     | soft drop    |
+| Q/Z     | Rotate Left  |
+| E/↑     | Rotate Right |
 
 ## License
 
@@ -32,10 +39,12 @@ There are numerous references to this work, so look there too.
 
 ## References
 
-
+Each item is described in the source code.
 
 ## Change Log
 
-| Version |    Date    | Commit Hash                              |
-|:--------|:----------:|:-----------------------------------------|
-| 0.0.1   | 2023/08/13 | acbfa1a80de80ddce42baecac96d36c3ca692568 |
+| Version |    Date    | Commit Hash                                                                                   |
+|:--------|:----------:|:----------------------------------------------------------------------------------------------|
+| 0.0.1   | 2023/08/13 | https://github.com/project-wayamoti/WebTetris/commit/d83ba3d3f1f86a2aa5872bf036d037f9e2a75f95 |
+| 0.0.2   | 2023/08/21 | https://github.com/project-wayamoti/WebTetris/commit/1e4a8e9e58c791919c76a8556b687317913ce9f5 |
+| 1.0.0   | 2023/08/23 | https://github.com/project-wayamoti/WebTetris/commit/7dde8da21b1450c50989e046a404aeddc52541da |
