@@ -383,6 +383,9 @@ let blockGenerate = function() {
     block.x = 4;
     block.y = 0;
     block.status = 0;
+
+    // 次のブロックを表示
+    nextBlockViewer();
 };
 
 let nextBlockViewer = function() {
