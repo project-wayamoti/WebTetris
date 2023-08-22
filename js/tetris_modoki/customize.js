@@ -18,6 +18,7 @@ let fieldWidth = 12;   // フィールドの幅
 let fieldHeight = 18;  // フィールドの高さ
 let currentBlock = 1;  // 現在のブロック
 let nextBlock = Math.floor(Math.random() * (7)); // 次のブロック
+let rotateKey = true;  // 回転キーの連打防止
 let level = 1;         // レベル
 let score = 0;         // スコア
 let lines = 0;         // 消したライン数
@@ -580,8 +581,6 @@ document.getElementById("right").addEventListener("click", function() {
 document.getElementById("down").addEventListener("click", function() {
     blockMove();
 });
-
-let rotateKey = true;
 
 /* キーボードイベント
  * キーを押したときに実行
