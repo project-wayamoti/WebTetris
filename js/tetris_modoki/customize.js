@@ -241,9 +241,8 @@ let copy = function(sa, da, sx, sy, dx, dy, ignore) {
  * return:    設置できるかどうか
  */
 let setBlockCheck = function(blockType, status, x, y) {
-    // 確認用
-    console.log("blockType: " + blockType);
-    console.log("status: " + status);
+    // 一時停止中なら動かさない
+    if(playingState) return false;
 
     // ブロックデータ格納用
     const block = blocks[blockType][status];
@@ -311,7 +310,9 @@ let graph = function() {
 
 // 下に動かせるか判定
 let blockMove = function() {
-    if(playingState) return; // 一時停止中なら動かさない
+    // 一時停止中なら動かさない
+    if(playingState) return false;
+
     // 下に動かせるか？ このとき y 座標を +1 して判定
     if(setBlockCheck(block.type, block.status, block.x, block.y + 1)) {
         block.y++; // 動かせるなら動かす
@@ -323,7 +324,8 @@ let blockMove = function() {
 
 // 行列が埋まったら埋まった行を消して消えた分ブロックを下げる
 let deleteLine = function(y) {
-    if(playingState) return; // 一時停止中なら動かさない
+    // 一時停止中なら動かさない
+    if(playingState) return false;
 
     // 消す音の再生
     soundDelete.play();
@@ -337,6 +339,9 @@ let deleteLine = function(y) {
 
 // 動かせなくなったら次のブロックを登録
 let blockGenerate = function() {
+    // 一時停止中なら動かさない
+    if(playingState) return false;
+
     // 設置音の再生
     soundSet.play();
 
@@ -366,6 +371,9 @@ let blockGenerate = function() {
 };
 
 let nextBlockViewer = function() {
+    // 一時停止中なら動かさない
+    if(playingState) return false;
+
     // 出力場所の要素を取得
     let d = document.getElementById("nextBlockViewer");
 
@@ -408,28 +416,29 @@ let nextBlockViewer = function() {
  * 1000ms = 1s
  */
 let loop = function() {
-    console.log(cnt++);
     blockMove();
     setTimeout(loop, 1000);
 };
 
+// 音声ファイルの読み込み
+// MainBGM
 let soundBGM = new Audio();
 soundBGM.src = '../../audio/tetris_PlayingBGM.ogg';
 soundBGM.loop = true;
 soundBGM.volume = 0.1;
-
+// 回転音
 let soundRotate = new Audio();
 soundRotate.src = '../../audio/tetris_Rotate.ogg';
 soundRotate.volume = 0.1;
-
+// ゲームオーバー
 let soundGameOver = new Audio();
 soundGameOver.src = '../../audio/tetris_GameOver.ogg';
 soundGameOver.volume = 0.1;
-
+// 削除音
 let soundDelete = new Audio();
 soundDelete.src = '../../audio/tetris_Delete.ogg';
 soundDelete.volume = 0.1;
-
+// 設置音
 let soundSet = new Audio();
 soundSet.src = '../../audio/tetris_Set.ogg';
 soundSet.volume = 0.1;
@@ -508,8 +517,6 @@ window.addEventListener(
             return; // Do nothing if event already handled
         }
 
-        console.log("keycode = " + event.code);
-
         switch (event.code) {
             // ハードドロップ
             case "Space":
@@ -562,7 +569,6 @@ window.addEventListener(
                     if(block.status < 0) block.status = blockStatus[block.type];
                 }
         }
-        console.log("block_status => " + block.status);
     },
     true,
 );
