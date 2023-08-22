@@ -5,6 +5,30 @@
  * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/* 色々と参考にした資料のメモ
+ * テトリスのスコア加算に関する資料 - https://ch-random.net/post/96/
+ * windows.onloadを使ってはならない - https://took.jp/window-onload/
+ *                                  - https://www.tam-tam.co.jp/tipsnote/javascript/post601.html
+ * javascriptを取り扱う際のPath事情 - https://web-designer.cman.jp/other/path/
+ * javascript側からHTMLを書き換える - https://web-camp.io/magazine/archives/78967
+ * CSS Displayに関して              - https://developer.mozilla.org/ja/docs/Web/CSS/display
+ * CSS SVGの取り扱い方法            - https://www.freecodecamp.org/japanese/news/use-svg-images-in-css-html/
+ *
+ * サイトにないメモ
+ * Tetrisの描画をする際、Flexを使ったほうが楽だ！と言われたためこれを実践。
+ * Flexを用いることで座標をLocal指定できるようになったため若干の位置修正だけで済むようになった。
+ * ただし、Scoreにてパーセンテージを使って相対座標を取ろうとしたところ、1ブロック分=100%となった。
+ * 原因はinline-blockを使っていたためで、これを削除したところ正常に動作した。
+ * また、Flexを使うときはposition: absolute;を使うこと。
+ *
+ * また、テトリスの描画をする際、canvasを使うことも考えたが、
+ * 今回はcanvasを使わずに実装した。
+ *
+ * 音声ファイルにはMpeg3とOgg Vorbisdeで検討した結果、圧縮をした音源でもキレイな音が出るOgg Vorbisdeを採用した。
+ * また、音声ファイルには実際に収録したデータとインターネットにあるデータを使用している。
+ * もし問題があれば即座に削除しますので、ご連絡ください。 - wayamoti2015@waya0125.com
+ */
+
 function Block(x, y, type) {
     this.x = x;
     this.y = y;
@@ -480,13 +504,18 @@ let loop = function() {
 };
 
 /* 音声ファイルの読み込み
+ * 音声操作に関する資料 - https://www.webdesignleaves.com/pr/jquery/javascript-audio.html
+ *                      - https://blog.katsubemakito.net/html5/audio1
+ *
  * 自動再生時ブラウザがブロックするため、ボタンを押したときに実行する
  * https://developer.mozilla.org/ja/docs/Web/Media/Autoplay_guide
  *
  * サウンドを連続再生したときに音が重ならず単独で再生されてしまうので
  * これを回避するため再生前にcurrentTimeを0にする
+ * https://blog.myntinc.com/2019/05/javascriptaudioplay.html
  *
  * BGM by https://www.youtube.com/playlist?list=PLKkxnBwFOJGIu3XSOHYW4r9dFyaoC9zNW
+ * SE by https://www.youtube.com/watch?v=NhNQ4KQvUCw
  */
 // MainBGM
 let soundBGM = new Audio();
@@ -612,38 +641,42 @@ document.getElementById("down").addEventListener("click", function() {
 window.addEventListener(
     "keydown",
     (event) => {
-        if (event.defaultPrevented) {
-            return; // Do nothing if event already handled
-        }
+        if (event.defaultPrevented) return; // イベントがすでに処理されている場合は何もしない
 
+        // キーに応じて処理を分ける
         switch (event.code) {
             // ハードドロップ
             case "Space":
             case "KeyW":
-                while(setBlockCheck(block.type, block.status, block.x, block.y + 1)){  //  下まで動かす
-                    block.y++;
-                }
-                blockGenerate();
-                score += 5 * level;
+                // 下に動かせるなら設置可能な最下層まで動かす
+                while(setBlockCheck(block.type, block.status, block.x, block.y + 1)) block.y++;
+                blockGenerate();    // 次のブロックへ
+                score += 5 * level; // スコアを加算
                 break;
             // ソフトドロップ
             case "KeyS":
             case "ArrowDown":
+                // 下に1マス動かす
                 blockMove();
                 break;
             // 左移動
             case "KeyA":
             case "ArrowLeft":
-                if(setBlockCheck(block.type, block.status, block.x - 1, block.y)) block.x--; // 左に動かせるなら動かす
+                // 左に動かせるなら動かす
+                if(setBlockCheck(block.type, block.status, block.x - 1, block.y)) block.x--;
                 break;
             // 右移動
             case "KeyD":
             case "ArrowRight":
-                if(setBlockCheck(block.type, block.status, block.x + 1, block.y)) block.x++; // 右に動かせるなら動かす
+                // 右に動かせるなら動かす
+                if(setBlockCheck(block.type, block.status, block.x + 1, block.y)) block.x++;
                 break;
             // 左回転
             case "KeyQ":
             case "KeyZ":
+                // 一時停止中 or GameOverなら動かさない
+                if(playingState || gameOver) return false;
+
                 // 左に回転させる
                 rotateKey = !rotateKey;
 
@@ -652,10 +685,17 @@ window.addEventListener(
                 soundRotate.play().then(r => r).catch(e => e); // エラーを無視
 
                 // 左に回転できるなら回転する
-                block.status--;
+                block.status--; // statusを引いていく
+
+                // statusが-1になったらstatusを戻す
                 if(block.status < 0) block.status = blockStatus[block.type];
+
+                // 回転できないなら
                 if(!setBlockCheck(block.type, block.status, block.x, block.y)) {
+                    // statusを戻す
                     block.status++;
+
+                    // statusが最大値を超えたらstatusを0に戻す
                     if(block.status > blockStatus[block.type]) block.status = 0;
                 }
                 break;
@@ -673,16 +713,23 @@ window.addEventListener(
                 soundRotate.play().then(r => r).catch(e => e); // エラーを無視
 
                 // 右に回転できるなら回転する
-                block.status++;
+                block.status++; // statusを足していく
+
+                // statusが最大値を超えたらstatusを0に戻す
                 if(block.status > blockStatus[block.type]) block.status = 0;
+
+                // 回転できないなら
                 if(!setBlockCheck(block.type, block.status, block.x, block.y)){
+                    // statusを戻す
                     block.status--;
+
+                    // statusが-1になったらstatusを戻す
                     if(block.status < 0) block.status = blockStatus[block.type];
                 }
         }
     },
-    true,
+    true, // キャプチャー
 );
 
-setInterval(graph, fps);
-loop(); // メインループを実行
+setInterval(graph, fps); // フレームの最後に実行
+loop();                  // メインループを実行
