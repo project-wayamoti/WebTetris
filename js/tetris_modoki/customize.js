@@ -319,9 +319,6 @@ let graph = function() {
 
 // 下に動かせるか判定
 let blockMove = function() {
-    // 一時停止中なら動かさない
-    if(playingState) return false;
-
     // 下に動かせるか？ このとき y 座標を +1 して判定
     if(setBlockCheck(block.type, block.status, block.x, block.y + 1)) {
         block.y++; // 動かせるなら動かす
@@ -333,9 +330,6 @@ let blockMove = function() {
 
 // 行列が埋まったら埋まった行を消して消えた分ブロックを下げる
 let deleteLine = function(y) {
-    // 一時停止中なら動かさない
-    if(playingState) return false;
-
     // 消す音の再生
     soundDelete.currentTime = 0;
     soundDelete.play().then(r => r).catch(e => e); // エラーを無視
@@ -349,8 +343,8 @@ let deleteLine = function(y) {
 
 // 動かせなくなったら次のブロックを登録
 let blockGenerate = function() {
-    // 一時停止中なら動かさない
-    if(playingState) return false;
+    // 一時停止中 or GameOverなら動かさない
+    if(playingState || gameOver) return false;
 
     // 現在のブロックを格納する変数
     currentBlock = nextBlock;
@@ -643,6 +637,9 @@ window.addEventListener(
             // 右回転
             case "KeyE":
             case "ArrowUp":
+                // 一時停止中 or GameOverなら動かさない
+                if(playingState || gameOver) return false;
+
                 // 右に回転させる
                 rotateKey = !rotateKey;
 
