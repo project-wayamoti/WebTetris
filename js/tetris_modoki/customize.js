@@ -353,11 +353,9 @@ let blockGenerate = function() {
 
     // 現在のブロックを格納する変数
     currentBlock = nextBlock;
-    document.getElementById("currentBlock").textContent = currentBlock;
 
     // 次のブロックを格納する変数
     nextBlock = Math.floor(Math.random() * (7));
-    document.getElementById("nextBlock").textContent = nextBlock;
 
     // 設置音の再生
     soundSet.currentTime = 0;
@@ -465,13 +463,10 @@ let loop = function() {
     // ブロックを動かす
     blockMove();
 
-    // 次のブロックを表示
-    nextBlockViewer();
-
     document.getElementById("score").textContent = score;
     document.getElementById("level").textContent = level;
     document.getElementById("lines").textContent = lines;
-    document.getElementById("combo").textContent = combo;
+    //document.getElementById("combo").textContent = combo;
 
     if(level < 10) if(score / 2000 > level) level++;
 
