@@ -433,7 +433,7 @@ let loop = function() {
  */
 // MainBGM
 let soundBGM = new Audio();
-soundBGM.src = '../../audio/tetris_PlayingBGM.ogg';
+soundBGM.src = '../../audio/tetris_TypeA.ogg';
 soundBGM.loop = true;
 soundBGM.volume = 0.1;
 // 回転音
