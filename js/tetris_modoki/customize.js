@@ -16,7 +16,7 @@ const block = new Block(4, 0, Math.floor(Math.random() * (7)));
 let fps = 1000 / 60;   // 60fps
 let fieldWidth = 12;  // フィールドの幅
 let fieldHeight = 18; // フィールドの高さ
-let playingState = false; // 再生を止めるか否か
+let playingState = true; // 再生を止めるか否か (true: 一時停止, false: 再生)
 
 // ブロックの種類
 let cell = {
@@ -326,7 +326,7 @@ let deleteLine = function(y) {
     if(playingState) return; // 一時停止中なら動かさない
 
     // 消す音の再生
-    soundDelete();
+    soundDelete.play();
 
     for(let i = y; i > 0; i--) {
         for(let j = 1; j < fieldWidth - 1; j++) {
@@ -338,7 +338,7 @@ let deleteLine = function(y) {
 // 動かせなくなったら次のブロックを登録
 let blockGenerate = function() {
     // 設置音の再生
-    soundSet();
+    soundSet.play();
 
     // fieldに固定
     copy(blocks[block.type][block.status], fieldRAM, 0, 0, block.x, block.y, 0);
@@ -413,42 +413,26 @@ let loop = function() {
     setTimeout(loop, 1000);
 };
 
-let soundBGM = function() {
-    let BGM = new Audio();
-    BGM.src = '../../audio/tetris_PlayingBGM.ogg';
-    BGM.loop = true;
-    BGM.autoplay = true;
-    BGM.volume = 0.1;
-    BGM.play();
-}
+let soundBGM = new Audio();
+soundBGM.src = '../../audio/tetris_PlayingBGM.ogg';
+soundBGM.loop = true;
+soundBGM.volume = 0.1;
 
-let soundGameOver = function() {
-    let GameOver = new Audio();
-    GameOver.src = '../../audio/tetris_GameOver.ogg';
-    GameOver.volume = 0.1;
-    GameOver.play();
-}
+let soundRotate = new Audio();
+soundRotate.src = '../../audio/tetris_Rotate.ogg';
+soundRotate.volume = 0.1;
 
-let soundRotate = function() {
-    let Rotate = new Audio();
-    Rotate.src = '../../audio/tetris_Rotate.ogg';
-    Rotate.volume = 0.1;
-    Rotate.play();
-}
+let soundGameOver = new Audio();
+soundGameOver.src = '../../audio/tetris_GameOver.ogg';
+soundGameOver.volume = 0.1;
 
-let soundDelete = function() {
-    let Delete = new Audio();
-    Delete.src = '../../audio/tetris_Delete.ogg';
-    Delete.volume = 0.1;
-    Delete.play();
-}
+let soundDelete = new Audio();
+soundDelete.src = '../../audio/tetris_Delete.ogg';
+soundDelete.volume = 0.1;
 
-let soundSet = function() {
-    let Set = new Audio();
-    Set.src = '../../audio/tetris_Set.ogg';
-    Set.volume = 0.1;
-    Set.play();
-}
+let soundSet = new Audio();
+soundSet.src = '../../audio/tetris_Set.ogg';
+soundSet.volume = 0.1;
 
 // ボタンクリックイベント
 
@@ -463,31 +447,30 @@ document.getElementById("playing").addEventListener("click", function() {
     // trueとfalseの切り替え (否定演算子を使用)
     playingState = !playingState;
 
-    // ボタンのテキストを切り替え
-    document.getElementById("playingState").textContent = playingState ? "再生" : "一時停止";
-});
+    soundBGM.play();
 
+    // ボタンのテキストを切り替え
+    document.getElementById("playingState").textContent = playingState ? "一時停止" : "再生";
+});
 /* 回転ボタン
  * 1回転ごとにstatusを引いていく
  */
 document.getElementById("rotate").addEventListener("click", function() {block.status++;
-    soundRotate();
+    soundRotate.play();
     if(block.status > blockStatus[block.type]) block.status = 0;
     if(!setBlockCheck(block.type, block.status, block.x, block.y)){
         block.status--;
         if(block.status < 0) block.status = blockStatus[block.type];
     }
 });
-
 /* 左移動ボタン
  * 左に動かせるなら動かす
  */
 document.getElementById("left").addEventListener("click", function() {
     if(setBlockCheck(block.type, block.status, block.x - 1, block.y)) block.x--;
 });
-
 /* 上移動ボタン
- * 上に動かせるなら動かす
+ * 一気に下に設置
  */
 document.getElementById("up").addEventListener("click", function() {
     while(setBlockCheck(block.type, block.status, block.x, block.y + 1)){
@@ -495,14 +478,12 @@ document.getElementById("up").addEventListener("click", function() {
     }
     blockGenerate();
 });
-
 /* 右移動ボタン
  * 右に動かせるなら動かす
  */
 document.getElementById("right").addEventListener("click", function() {
     if(setBlockCheck(block.type, block.status, block.x + 1, block.y)) block.x++;
 });
-
 /* 下移動ボタン
  * 下に動かせるなら動かす
  */
@@ -530,29 +511,35 @@ window.addEventListener(
         console.log("keycode = " + event.code);
 
         switch (event.code) {
+            // ハードドロップ
+            case "Space":
             case "KeyW":
-            case "ArrowUp":
                 while(setBlockCheck(block.type, block.status, block.x, block.y + 1)){  //  下まで動かす
                     block.y++;
                 }
                 blockGenerate();
                 break;
+            // ソフトドロップ
+            case "KeyS":
+            case "ArrowDown":
+                blockMove();
+                break;
+            // 左移動
             case "KeyA":
             case "ArrowLeft":
                 if(setBlockCheck(block.type, block.status, block.x - 1, block.y)) block.x--; // 左に動かせるなら動かす
                 break;
-            case "KeyS":
-            case "ArrowDown":
-                blockMove();  // 下に動かせるなら動かす
-                break;
+            // 右移動
             case "KeyD":
             case "ArrowRight":
                 if(setBlockCheck(block.type, block.status, block.x + 1, block.y)) block.x++; // 右に動かせるなら動かす
                 break;
+            // 左回転
             case "KeyQ":
+            case "KeyZ":
                 // 左に回転させる
                 rotateKey = !rotateKey;
-                soundRotate();
+                soundRotate.play();
                 // 左に回転できるなら回転する
                 block.status--;
                 if(block.status < 0) block.status = blockStatus[block.type];
@@ -561,10 +548,12 @@ window.addEventListener(
                     if(block.status > blockStatus[block.type]) block.status = 0;
                 }
                 break;
+            // 右回転
             case "KeyE":
+            case "ArrowUp":
                 // 右に回転させる
                 rotateKey = !rotateKey;
-                soundRotate();
+                soundRotate.play();
                 // 右に回転できるなら回転する
                 block.status++;
                 if(block.status > blockStatus[block.type]) block.status = 0;
@@ -577,13 +566,6 @@ window.addEventListener(
     },
     true,
 );
-
-/* Windowの読み込み完了時に実行
- * BGMを再生
- */
-window.addEventListener("load",function() {
-    soundBGM();
-});
 
 setInterval(graph, fps);
 loop(); // メインループを実行
