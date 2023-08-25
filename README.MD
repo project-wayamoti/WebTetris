@@ -4,13 +4,11 @@
 
 This is a simple Tetris game. It is based on the [Tetris game](https://github.com/ophum/tetris).
 
-Working project is [here](https://github.com/project-wayamoti/WebTetris).
-
-Stable project is [here](https://github.com/waya0125/WebTetris/).
-
-Preview is [here](https://waya0125.github.io/WebTetris/).
-
-*Waring : Since smartphone support is not yet complete, we currently recommend playing only on PC.*
+| Description     | Value                                          |
+|:----------------|:-----------------------------------------------|
+| Working project | https://github.com/project-wayamoti/WebTetris/ |
+| Stable project  | https://github.com/waya0125/WebTetris/         |
+| Preview         | https://waya0125.github.io/WebTetris/          |
 
 ## Installation
 
@@ -31,7 +29,7 @@ Preview is [here](https://waya0125.github.io/WebTetris/).
 
 ## License
 
-This software is released under the MIT License, see LICENSE.txt.
+This software is released under the MIT License, see [LICENSE](LICENSE).
 And more information, see [LICENSE](http://opensource.org/licenses/MIT).
 
 There are numerous references to this work, so look there too.
