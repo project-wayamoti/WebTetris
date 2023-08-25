@@ -219,10 +219,41 @@ table {
 
 /* ボタン */
 [id*="buttons"] {
-    padding-top: 53%;
+    padding-top: 450px;
 }
 #playing, #rotate, #left, #up, #right, #down {
     display: inline-grid;
     width: 42px;
     height: 42px;
 }
+/* ここまで Tetris 表示領域 */
+
+/* モバイル端末用の設定 */
+/* 画面の横幅が480px以下の場合に適用される */
+@media screen and (max-width: 480px) {
+    /* テトリス表示領域
+     * scaleを使って縮小し、originで基準を変更することでズレを解消する
+     */
+    .tetris {
+        transform: scale(80%);
+        transform-origin: -200% 0;
+    }
+    [id*="buttons"] {
+        padding-top: 360px;
+    }
+}
+/* 画面の横幅が360px以下の場合に適用される */
+@media screen and (max-width: 360px) {
+    /* テトリス表示領域
+     * scaleを使って縮小し、originで基準を変更することでズレを解消する
+     */
+    .tetris {
+        transform: scale(60%);
+        transform-origin: -75% 0;
+    }
+    [id*="buttons"] {
+        padding-top: 270px;
+        padding-bottom: 5px;
+    }
+}
+/* ここまで モバイル端末用の設定 */
