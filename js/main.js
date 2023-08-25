@@ -398,7 +398,7 @@ let blockGenerate = function() {
     for(let i = 1; i < fieldWidth - 1; i++) {
         if(fieldRAM[0][i] !== cell.none) {
             // 一度実行したら実行しない
-            if(gameOver) return false;
+            if(gameOver) return;
 
             // BGMを止める
             soundGameOver.currentTime = 0;
