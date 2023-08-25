@@ -93,41 +93,33 @@ table {
     border-left-width: 168px;
     border-top-width: 432px;
 }
-/* ここまで Tetris 表示領域 */
-
-*{
-    padding: 0;
-    margin: 0;
-}
-
-/* ゲーム画面表示場所の大きさとか */
-.BoxI {
+.previewI {
     padding-left: 15%;
-    padding-top: 28%;
+    padding-top: 24.5%;
 }
-.BoxT {
+.previewT {
     padding-left: 15%;
-    padding-top: 45%;
+    padding-top: 40%;
 }
-.BoxO {
+.previewO {
     padding-left: 15%;
-    padding-top: 42.5%;
+    padding-top: 40%;
 }
-.BoxZ {
+.previewZ {
     padding-left: 15%;
-    padding-top: 42.5%;
+    padding-top: 40%;
 }
-.BoxS {
+.previewS {
     padding-left: 15%;
-    padding-top: 42.5%;
+    padding-top: 40%;
 }
-.BoxL {
+.previewL {
     padding-left: 15%;
-    padding-top: 35%;
+    padding-top: 32.5%;
 }
-.BoxJ {
+.previewJ {
     padding-left: 15%;
-    padding-top: 35%;
+    padding-top: 32.5%;
 }
 
 #tetriminoScore {

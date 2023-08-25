@@ -463,13 +463,13 @@ let nextBlockViewer = function() {
     }
     s += "' id='nextBlockViewerImg' class='tetriminoNext ";
     switch(nextBlock) {
-        case 0: s += "BoxI"; break;
-        case 1: s += "BoxO"; break;
-        case 2: s += "BoxS"; break;
-        case 3: s += "BoxZ"; break;
-        case 4: s += "BoxJ"; break;
-        case 5: s += "BoxL"; break;
-        case 6: s += "BoxT"; break;
+        case 0: s += "previewI"; break;
+        case 1: s += "previewO"; break;
+        case 2: s += "previewS"; break;
+        case 3: s += "previewZ"; break;
+        case 4: s += "previewJ"; break;
+        case 5: s += "previewL"; break;
+        case 6: s += "previewT"; break;
     }
     s += "'>";
 
