@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 /* TTFフォントを読み込む - https://thinkit.co.jp/story/2011/08/18/2233 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');  /* Noto Color Emoji - https://fonts.google.com/specimen/Noto+Color+Emoji */
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap'); /* M+ Rounded 1c - https://fonts.google.com/specimen/M+PLUS+Rounded+1c */
@@ -14,6 +16,12 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
+/* HTMLのデフォルトのマージン・パディングを無効化 */
+*{
+    padding: 0;
+    margin: 0;
+}
 
 /* フォントの指定 */
 /* Early GameBoy - ゲームボーイ風のフォント */
@@ -33,16 +41,22 @@
 
 /* waya0125.com より移植 */
 body {
-    position: relative;
-    text-align: center;
-    -ms-user-select: none;/* none:選択させない / all:すべてを強制的に選択させる(部分的ではない) / text:ユーザーが直接選択したものを選択できるようにする */
-    -webkit-user-select: none;
-    user-select: none;
-    line-break: normal;/* auto:禁則処理を行わない / loose:最低限の禁則処理 / normal:一般的な禁則処理ルールを適用 / strict:細かな禁則処理うルールを適用 */
-    word-wrap: normal;
     /* フォントの指定 */
     font-family: 'M PLUS Rounded 1c', sans-serif; /* 用いるフォントの指定(指定がない場合はこれが優先される) */
     image-rendering: optimizeSpeed; /* smooth:滑らかにする / optimizeSpeed:低品質で高速 / optimizeQuality:高品質で低速 */
+
+    /* 画面配置 */
+    position: relative; /* 絶対座標を使用するために必要 */
+    text-align: center; /* テキストを中央に寄せる */
+
+    /* none:選択させない / all:すべてを強制的に選択させる(部分的ではない) / text:ユーザーが直接選択したものを選択できるようにする */
+    user-select: none;         /* Chromeでの選択不可 */
+    -ms-user-select: none;     /* IE10での選択不可 */
+    -webkit-user-select: none; /* Safariでの選択不可 */
+
+    /* auto:禁則処理を行わない / loose:最低限の禁則処理 / normal:一般的な禁則処理ルールを適用 / strict:細かな禁則処理うルールを適用 */
+    line-break: normal; /* 改行方法の指定 */
+    word-wrap: normal;  /* 単語の途中での改行を禁止 */
 }
 table {
     /* 中央に寄せる */
