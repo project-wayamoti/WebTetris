@@ -8,7 +8,7 @@ This is a simple Tetris game. It is based on the [Tetris game](https://github.co
 |:----------------|:-----------------------------------------------|
 | Working project | https://github.com/project-wayamoti/WebTetris/ |
 | Stable project  | https://github.com/waya0125/WebTetris/         |
-| Preview         | https://waya0125.github.io/WebTetris/          |
+| Preview         | https://project-wayamoti.github.io/WebTetris/  |
 
 ## Installation
 
