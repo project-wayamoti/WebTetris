@@ -254,7 +254,7 @@ let blocks = [
  * height: コピーする高さ<br>
  * ignore: コピーしない値
  */
-let copy = function(sa, da, sx, sy, dx, dy, ignore) {
+function copy(sa, da, sx, sy, dx, dy, ignore) {
     let width = sa[0].length;
     let height = sa.length;
 
@@ -264,7 +264,7 @@ let copy = function(sa, da, sx, sy, dx, dy, ignore) {
             da[dy + i][dx + j] = sa[sy + i][sx + j];
         }
     }
-};
+}
 
 /** ブロックを設置できるか判定<br>
  * blockType: ブロックの種類<br>
@@ -273,7 +273,7 @@ let copy = function(sa, da, sx, sy, dx, dy, ignore) {
  * y:         ブロックのy座標<br>
  * return:    設置できるかどうか
  */
-let setBlockCheck = function(blockType, status, x, y) {
+function setBlockCheck(blockType, status, x, y) {
     // 一時停止中なら動かさない
     if(playingState) return false;
 
@@ -292,10 +292,10 @@ let setBlockCheck = function(blockType, status, x, y) {
         }
     }
     return true;
-};
+}
 
 // viewRAMを描画 (viewRAM → html)
-let draw = function() {
+function draw() {
     // 出力場所の要素を取得
     let d = document.getElementById("tetriminoDraw");
 
@@ -332,17 +332,17 @@ let draw = function() {
 
     // 要素に書き込み
     d.innerHTML = s;
-};
+}
 
 // フレームの最後 viewRAM に fieldRAM をコピー
-let graph = function() {
+function graph() {
     copy(fieldRAM, viewRAM, 0, 0, 0, 0, -1, 0); // viewRAM に fieldRAM をコピー
     copy(blocks[block.type][block.status], viewRAM, 0, 0, block.x, block.y, 0); // viewRAM にブロックをコピー
     draw();
-};
+}
 
 // 下に動かせるか判定
-let blockMove = function() {
+function blockMove() {
     // 下に動かせるか？ このとき y 座標を +1 して判定
     if(setBlockCheck(block.type, block.status, block.x, block.y + 1)) {
         block.y++; // 動かせるなら動かす
@@ -363,10 +363,10 @@ let deleteLine = function(y) {
             fieldRAM[i][j] = fieldRAM[i-1][j];
         }
     }
-};
+}
 
 // 動かせなくなったら次のブロックを登録
-let blockGenerate = function() {
+function blockGenerate() {
     // 現在のブロックを格納する変数
     currentBlock = nextBlock;
 
@@ -438,9 +438,9 @@ let blockGenerate = function() {
 
     // 次のブロックを表示
     nextBlockViewer();
-};
+}
 
-let nextBlockViewer = function() {
+function nextBlockViewer() {
     // 出力場所の要素を取得
     let d = document.getElementById("nextBlockViewer");
 
@@ -474,7 +474,7 @@ let nextBlockViewer = function() {
     d.innerHTML = s;
 }
 
-let tick = function() {
+function tick() {
     let base = 1000;
     if(level === 1) return base;
     base -= level * 30;
@@ -485,7 +485,7 @@ let tick = function() {
  * 1秒経過するごとに実行
  * 1000ms = 1s
  */
-let loop = function() {
+function loop() {
     // 一時停止中・開始前・ゲームオーバーなら動かさない
     if(!playingState || gameOver) {
         // ブロックを動かす
@@ -502,6 +502,7 @@ let loop = function() {
     // 1秒経過するごとに実行
     setTimeout(loop, 1000 - ((level - 1) * 30));
 };
+}
 
 /* 音声ファイルの読み込み
  * 音声操作に関する資料 - https://www.webdesignleaves.com/pr/jquery/javascript-audio.html
