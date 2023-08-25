@@ -587,9 +587,7 @@ document.getElementById("playing").addEventListener("click", function() {
     // ボタンのテキストを切り替え
     document.getElementById("playingState").textContent = playingState ? "一時停止" : "再生";
 });
-/* 回転ボタン
- * 1回転ごとにstatusを引いていく
- */
+// 右回転ボタン 1回転ごとにstatusを引いていく
 document.getElementById("rotate").addEventListener("click", function() {block.status++;
     // 一時停止中・開始前・ゲームオーバーなら動かさない
     if(playingState) return;
@@ -603,18 +601,14 @@ document.getElementById("rotate").addEventListener("click", function() {block.st
         if(block.status < 0) block.status = blockStatus[block.type];
     }
 });
-/* 左移動ボタン
- * 左に動かせるなら動かす
- */
+// 左移動ボタン 左に動かせるなら動かす
 document.getElementById("left").addEventListener("click", function() {
     // 一時停止中・開始前・ゲームオーバーなら動かさない
     if(playingState || gameOver) return;
 
     if(setBlockCheck(block.type, block.status, block.x - 1, block.y)) block.x--;
 });
-/* 上移動ボタン
- * 一気に下に設置
- */
+// 上移動ボタン 一気に下に設置
 document.getElementById("up").addEventListener("click", function() {
     // 一時停止中・開始前・ゲームオーバーなら動かさない
     if(playingState || gameOver) return;
@@ -625,18 +619,14 @@ document.getElementById("up").addEventListener("click", function() {
     blockGenerate();
     score += 5 * level;
 });
-/* 右移動ボタン
- * 右に動かせるなら動かす
- */
+// 右移動ボタン 右に動かせるなら動かす
 document.getElementById("right").addEventListener("click", function() {
     // 一時停止中・開始前・ゲームオーバーなら動かさない
     if(playingState || gameOver) return;
 
     if(setBlockCheck(block.type, block.status, block.x + 1, block.y)) block.x++;
 });
-/* 下移動ボタン
- * 下に動かせるなら動かす
- */
+// 下移動ボタン 下に動かせるなら動かす
 document.getElementById("down").addEventListener("click", function() {
     // 一時停止中・開始前・ゲームオーバーなら動かさない
     if(playingState || gameOver) return;
