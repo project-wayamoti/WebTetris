@@ -26,70 +26,70 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
     </head>
     <body>
-    <h1>README</h1>
-    <p>テトリスのようなゲームです。</p>
-    <p>※ 最初のブロックだけ表示されません ※</p>
-    <p>※ スマホだと正しく描画・再生されない可能性があります ※</p>
-    <h1>操作方法</h1>
-    <table>
-        <tr>
-            <th>キー</th>
-            <th>操作</th>
-        </tr>
-        <tr>
-            <td>A/←</td>
-            <td class="text-align-left">左移動</td>
-        </tr>
-        <tr>
-            <td>D/→</td>
-            <td class="text-align-left">右移動</td>
-        </tr>
-        <tr>
-            <td>S/↓</td>
-            <td class="text-align-left">ソフトドロップ</td>
-        </tr>
-        <tr>
-            <td>W/Space</td>
-            <td class="text-align-left">ハードドロップ</td>
-        </tr>
-        <tr>
-            <td>Q/Z</td>
-            <td class="text-align-left">左回転</td>
-        </tr>
-        <tr>
-            <td>E/↑</td>
-            <td class="text-align-left">右回転</td>
-        </tr>
-    </table>
+        <h1>README</h1>
+        <p>テトリスのようなゲームです。</p>
+        <p>※ 最初のブロックだけ表示されません ※</p>
+        <p>※ スマホだと正しく描画・再生されない可能性があります ※</p>
+        <h1>操作方法</h1>
+        <table>
+            <tr>
+                <th>キー</th>
+                <th>操作</th>
+            </tr>
+            <tr>
+                <td>A/←</td>
+                <td class="text-align-left">左移動</td>
+            </tr>
+            <tr>
+                <td>D/→</td>
+                <td class="text-align-left">右移動</td>
+            </tr>
+            <tr>
+                <td>S/↓</td>
+                <td class="text-align-left">ソフトドロップ</td>
+            </tr>
+            <tr>
+                <td>W/Space</td>
+                <td class="text-align-left">ハードドロップ</td>
+            </tr>
+            <tr>
+                <td>Q/Z</td>
+                <td class="text-align-left">左回転</td>
+            </tr>
+            <tr>
+                <td>E/↑</td>
+                <td class="text-align-left">右回転</td>
+            </tr>
+        </table>
 
-    <br>
+        <br>
 
-    <h2><div id="playingState">停止中</div></h2>
+        <h2><div id="playingState">停止中</div></h2>
 
-    <br>
+        <br>
 
-    <div class="tetris resize">
-        <div id="tetriminoDraw"></div>
-        <div id="tetriminoScore">
-            <div class="scoreTitle gbFont">SCORE</div>
-            <div id="score" class="gbFont">0</div>
-            <div class="levelTitle gbFont">LEVEL</div>
-            <div id="level" class="gbFont">1</div>
-            <div class="linesTitle gbFont">LINES</div>
-            <div id="lines" class="gbFont">0</div>
-            <div id="nextBlockViewer"></div>
+        <div class="tetris">
+            <div id="tetriminoDraw"></div>
+            <div id="tetriminoScore">
+                <div class="scoreTitle gbFont">SCORE</div>
+                <div id="score" class="gbFont">0</div>
+                <div class="levelTitle gbFont">LEVEL</div>
+                <div id="level" class="gbFont">1</div>
+                <div class="linesTitle gbFont">LINES</div>
+                <div id="lines" class="gbFont">0</div>
+                <div id="nextBlockViewer"></div>
+            </div>
         </div>
-    </div>
 
-    <div id="buttons">
-        <input type="button" class="emojiFont" id="playing" value="⏯">
-        <input type="button" class="emojiFont" id="rotate" value="🔁">
-        <input type="button" class="emojiFont" id="left" value="←">
-        <input type="button" class="emojiFont" id="up" value="↑">
-        <input type="button" class="emojiFont" id="right" value="→">
-        <input type="button" class="emojiFont" id="down" value="↓">
-    </div>
+        <div id="buttons">
+            <input type="button" class="emojiFont" id="playing" value="⏯">
+            <input type="button" class="emojiFont" id="rotate" value="🔁">
+            <input type="button" class="emojiFont" id="left" value="←">
+            <input type="button" class="emojiFont" id="up" value="↑">
+            <input type="button" class="emojiFont" id="right" value="→">
+            <input type="button" class="emojiFont" id="down" value="↓">
+        </div>
 
-    <script src="js/tetris_modoki/main.js"></script>
+        <script src="js/tetris_modoki/main.js"></script>
     </body>
 </html>
