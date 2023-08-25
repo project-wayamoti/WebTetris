@@ -1,3 +1,13 @@
+/* TTFフォントを読み込む - https://thinkit.co.jp/story/2011/08/18/2233 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');  /* Noto Color Emoji - https://fonts.google.com/specimen/Noto+Color+Emoji */
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap'); /* M+ Rounded 1c - https://fonts.google.com/specimen/M+PLUS+Rounded+1c */
+@font-face {
+    font-family: 'EarlyGameBoy';
+
+    /* Early GameBoy - https://www.dafont.com/early-gameboy.font */
+    src: url('../font/EarlyGameBoy.ttf') format('truetype');
+}
+
 /*
  * Copyright (c) 2023 wayamoti2015@waya0125 All Rights Reserved.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -5,11 +15,20 @@
  * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/* TTFフォントを読み込む - https://thinkit.co.jp/story/2011/08/18/2233 */
-@font-face {
-    font-family: 'EarlyGameBoy';
-    /* Early GameBoy - https://www.dafont.com/early-gameboy.font */
-    src: url('../font/EarlyGameBoy.ttf') format('truetype');
+/* フォントの指定 */
+/* Early GameBoy - ゲームボーイ風のフォント */
+.gbFont {
+    font-family: 'EarlyGameBoy', monospace;
+    font-size: 23px;
+    color: #1f4130;
+    image-rendering: pixelated;
+}
+/* Noto Color Emoji - 絵文字フォント */
+.emojiFont {
+    font-family: 'Noto Color Emoji', emoji;
+    font-size: 27px;
+    color: #000;
+    image-rendering: optimizeSpeed;
 }
 
 /* waya0125.com より移植 */
@@ -21,6 +40,9 @@ body {
     user-select: none;
     line-break: normal;/* auto:禁則処理を行わない / loose:最低限の禁則処理 / normal:一般的な禁則処理ルールを適用 / strict:細かな禁則処理うルールを適用 */
     word-wrap: normal;
+    /* フォントの指定 */
+    font-family: 'M PLUS Rounded 1c', sans-serif; /* 用いるフォントの指定(指定がない場合はこれが優先される) */
+    image-rendering: optimizeSpeed; /* smooth:滑らかにする / optimizeSpeed:低品質で高速 / optimizeQuality:高品質で低速 */
 }
 table {
     /* 中央に寄せる */
