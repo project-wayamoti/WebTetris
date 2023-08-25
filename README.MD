@@ -6,9 +6,10 @@ This is a simple Tetris game. It is based on the [Tetris game](https://github.co
 
 | Description     | Value                                          |
 |:----------------|:-----------------------------------------------|
-| Working project | https://github.com/project-wayamoti/WebTetris/ |
 | Stable project  | https://github.com/waya0125/WebTetris/         |
-| Preview         | https://project-wayamoti.github.io/WebTetris/  |
+| Working project | https://github.com/project-wayamoti/WebTetris/ |
+| Preview Stable  | https://waya0125.github.io/WebTetris/          |
+| Preview Beta    | https://project-wayamoti.github.io/WebTetris/  |
 
 ## Installation
 
@@ -59,3 +60,4 @@ Each item is described in the source code.
 | 1.0.0   | 2023/08/23 | https://github.com/project-wayamoti/WebTetris/commit/7dde8da21b1450c50989e046a404aeddc52541da |
 | 1.0.1   | 2023/08/24 | https://github.com/project-wayamoti/WebTetris/commit/686f88ab872bc3954800d7e35b31125829451677 |
 | 1.0.2   | 2023/08/26 | https://github.com/project-wayamoti/WebTetris/commit/70974b462c05bf6511690d86c7210407fd77ca19 |
+| 1.0.3   | 2023/08/27 | https://github.com/project-wayamoti/WebTetris/commit/5251f4a4afba589bce879829e82d651e5fd31dac |
