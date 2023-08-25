@@ -26,6 +26,9 @@ This is a simple Tetris game. It is based on the [Tetris game](https://github.co
 | S/↓     | soft drop    |
 | Q/Z     | Rotate Left  |
 | E/↑     | Rotate Right |
+| Escape  | Pause        |
+
+Read more [here](https://waya0125.github.io/tetris/README.html)
 
 ## License
 
