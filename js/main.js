@@ -350,10 +350,10 @@ function blockMove() {
     else {
         blockGenerate(); // 動かせないなら次のブロックへ
     }
-};
+}
 
 // 行列が埋まったら埋まった行を消して消えた分ブロックを下げる
-let deleteLine = function(y) {
+function deleteLine(y) {
     // 消す音の再生
     soundDelete.currentTime = 0;
     soundDelete.play().then(r => r).catch(e => e); // エラーを無視
@@ -501,7 +501,7 @@ function loop() {
 
     // 1秒経過するごとに実行
     setTimeout(loop, 1000 - ((level - 1) * 30));
-};
+}
 }
 
 /* 音声ファイルの読み込み
