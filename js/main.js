@@ -13,6 +13,7 @@
  * javascript側からHTMLを書き換える - https://web-camp.io/magazine/archives/78967
  * CSS Displayに関して              - https://developer.mozilla.org/ja/docs/Web/CSS/display
  * CSS SVGの取り扱い方法            - https://www.freecodecamp.org/japanese/news/use-svg-images-in-css-html/
+ * innerHTMLの取り扱い              - https://developer.mozilla.org/ja/docs/Web/API/Element/innerHTML
  *
  * サイトにないメモ
  * Tetrisの描画をする際、Flexを使ったほうが楽だ！と言われたためこれを実践。
@@ -400,33 +401,8 @@ function blockGenerate() {
             // 一度実行したら実行しない
             if(gameOver) return;
 
-            // BGMを止める
-            soundGameOver.currentTime = 0;
-            soundBGM.pause();
-
-            // ゲームオーバー音の再生
-            soundGameOver.currentTime = 0;
-            soundGameOver.play().then(r => r).catch(e => e); // エラーを無視
-
-            soundGameOver.addEventListener('ended', (event) => {
-                // ハイスコア音の再生
-                soundHighScoreStart.currentTime = 0;
-                soundHighScoreStart.play().then(r => r).catch(e => e); // エラーを無視
-
-                soundHighScoreStart.addEventListener('ended', (event) => {
-                    // ハイスコアループ音の再生
-                    soundHighScoreLoop.currentTime = 0;
-                    soundHighScoreLoop.play().then(r => r).catch(e => e); // エラーを無視
-                });
-            });
-
-            // ゲームオーバー
-            gameOver = true;
-            playingState = true;
-
             // ゲームオーバー画面を表示
-            document.getElementById("playingState").textContent = "ゲームオーバー";
-            alert("ゲームオーバー\nスコア: " + score + "\nレベル: " + level + "\nライン: " + lines);
+            gameOverViewer();
         }
     }
 
@@ -502,6 +478,70 @@ function loop() {
     // 1秒経過するごとに実行
     setTimeout(loop, 1000 - ((level - 1) * 30));
 }
+
+// ゲームオーバー時の処理
+function gameOverViewer() {
+    // BGMを止める
+    soundGameOver.currentTime = 0;
+    soundBGM.pause();
+
+    // ゲームオーバー音の再生
+    soundGameOver.currentTime = 0;
+    soundGameOver.play().then(r => r).catch(e => e); // エラーを無視
+
+    soundGameOver.addEventListener('ended', (event) => {
+        // ハイスコア音の再生
+        soundHighScoreStart.currentTime = 0;
+        soundHighScoreStart.play().then(r => r).catch(e => e); // エラーを無視
+
+        soundHighScoreStart.addEventListener('ended', (event) => {
+            // ハイスコアループ音の再生
+            soundHighScoreLoop.currentTime = 0;
+            soundHighScoreLoop.play().then(r => r).catch(e => e); // エラーを無視
+        });
+    });
+
+    // ゲームオーバー
+    gameOver = true;
+
+    // ゲームオーバー画面を表示
+    document.getElementById("playingState").textContent = "ゲームオーバー";
+    alert("ゲームオーバー\nスコア: " + score + "\nレベル: " + level + "\nライン: " + lines);
+
+    // ゲームオーバーになったらシェアボタンを表示 - https://style.potepan.com/articles/21691.html#onclick-2
+    document.getElementById("shareTwitter").innerHTML = "<a class='twitter-share-button' href='' " +
+        "onclick='shareToTwitter()' target='_blank' rel='nofollow noopener noreferrer'>" +
+        "<img src='../img/webp/twitter_tweet.webp' width='80' height='20'></a>";
+    document.getElementById("shareMisskey").innerHTML = "<a href='' onclick='shareToFediverse()' " +
+        "target='_blank' rel='nofollow noopener noreferrer'><img src='../img/webp/misskey_note.webp' width='80' height='20'></a>";
+}
+
+// メモ: 改行には%0Aを使用する。スペースには%20を使用する。
+const uri1 = "テトリスもどきで%20";
+const uri2 = "%20ライン消して%20";
+const uri3 = "%20点獲得しました！";
+/* TwitterShare - https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview
+                - https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/guides/web-intent
+                - https://hirashimatakumi.com/blog/1384.html
+ */
+function shareToTwitter() {
+    // テキストの生成
+    const text = uri1 + lines + uri2 + score + uri3 + "%0A&hashtags=テトリスもどき,WebTetris&related=waya0125";
+    // 書き出し形式 https://twitter.com/intent/tweet?text=メッセージ&hashtags=ハッシュタグ&related=関連アカウント
+    window.open(
+        "https://twitter.com/intent/tweet?text=" + text,
+        '',
+        'width=800, height=600');
+}
+// MisskeyShare - https://misskeyshare.link/introduce.html
+function shareToFediverse() {
+    // テキストの生成
+    const text = uri1 + lines + uri2 + score + uri3;
+    // 書き出し形式 https://misskeyshare.link/share.html?text=メッセージ&url=URL
+    window.open(
+        "https://misskeyshare.link/share.html?text=" + text + "&url=" + 'https://waya0125.github.io/WebTetris/',
+        '',
+        'width=500, height=600');
 }
 
 /* 音声ファイルの読み込み
