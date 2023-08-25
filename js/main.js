@@ -47,7 +47,7 @@ let rotateKey = true;  // 回転キーの連打防止
 let level = 1;         // レベル
 let score = 0;         // スコア
 let lines = 0;         // 消したライン数
-let combo = 0;         // コンボ数
+let combo = 0;         // コンボ数 (未実装)
 let playingState = true; // 再生を止めるか否か (true: 一時停止, false: 再生)
 let gameOver = false;  // ゲームオーバーか否か
 
@@ -471,7 +471,7 @@ function loop() {
         document.getElementById("score").textContent = score;
         document.getElementById("level").textContent = level;
         document.getElementById("lines").textContent = lines;
-        //document.getElementById("combo").textContent = combo;
+        //document.getElementById("combo").textContent = combo; // 未実装
 
         if(level < 10) if(score / 2000 > level) level++;
     }
