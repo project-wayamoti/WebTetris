@@ -649,6 +649,27 @@ window.addEventListener(
 
         // キーに応じて処理を分ける
         switch (event.code) {
+            // 一時停止
+            case "Escape":
+                // ゲームオーバーならリロード
+                if(gameOver) location.reload();
+
+                // 一時停止中・開始前・ゲームオーバーなら動かさない
+                if(!playingState) {
+                    playingState = true;
+                    soundPause.currentTime = 0;
+                    soundPause.play().then(r => r).catch(e => e); // エラーを無視
+                    soundBGM.pause();
+                }
+                else {
+                    playingState = false;
+                    soundBGM.play().then(r => r).catch(e => e); // エラーを無視
+                }
+
+                // ボタンのテキストを切り替え
+                document.getElementById("playingState").textContent = playingState ? "一時停止" : "再生";
+
+                break;
             // ハードドロップ
             case "Space":
             case "KeyW":
