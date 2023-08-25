@@ -630,10 +630,11 @@ document.getElementById("playing").addEventListener("click", function() {
     document.getElementById("playingState").textContent = playingState ? "一時停止" : "再生";
 });
 // 右回転ボタン 1回転ごとにstatusを引いていく
-document.getElementById("rotate").addEventListener("click", function() {block.status++;
+document.getElementById("rotate").addEventListener("click", function() {
     // 一時停止中・開始前・ゲームオーバーなら動かさない
     if(playingState || gameOver) return;
 
+    block.status++;
     soundRotate.currentTime = 0;
     soundRotate.play().then(r => r).catch(e => e); // エラーを無視
 
