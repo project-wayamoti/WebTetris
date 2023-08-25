@@ -632,7 +632,7 @@ document.getElementById("playing").addEventListener("click", function() {
 // 右回転ボタン 1回転ごとにstatusを引いていく
 document.getElementById("rotate").addEventListener("click", function() {block.status++;
     // 一時停止中・開始前・ゲームオーバーなら動かさない
-    if(playingState) return;
+    if(playingState || gameOver) return;
 
     soundRotate.currentTime = 0;
     soundRotate.play().then(r => r).catch(e => e); // エラーを無視
@@ -715,6 +715,9 @@ window.addEventListener(
             // ハードドロップ
             case "Space":
             case "KeyW":
+                // 一時停止中・開始前・ゲームオーバーなら動かさない
+                if(playingState || gameOver) return;
+
                 // 下に動かせるなら設置可能な最下層まで動かす
                 while(setBlockCheck(block.type, block.status, block.x, block.y + 1)) block.y++;
                 blockGenerate();    // 次のブロックへ
@@ -723,6 +726,9 @@ window.addEventListener(
             // ソフトドロップ
             case "KeyS":
             case "ArrowDown":
+                // 一時停止中・開始前・ゲームオーバーなら動かさない
+                if(playingState || gameOver) return;
+
                 // 下に1マス動かす
                 blockMove();
                 break;
