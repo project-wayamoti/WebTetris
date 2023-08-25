@@ -46,82 +46,18 @@ table {
 }
 /* ここまで waya0125.com からの移植・構文改変 */
 
-.gbFont {
-    font-family: 'EarlyGameBoy', system-ui;
-    font-size: 23px;
-    color: #1f4130;
-    image-rendering: pixelated;
-}
-.scoreTitle {
-    padding-top: 13%;
-    padding-left: 3%;
-}
-#score {
-    padding-top: 11%;
-    padding-left: 3%;
-}
-.levelTitle {
-    padding-top: 25%;
-    padding-left: 3%;
-}
-#level {
-    margin-top: -2.5%;
-    padding-left: 3%;
-}
-.linesTitle {
-    padding-top: 10%;
-    padding-left: 3%;
-}
-#lines {
-    margin-top: -2.5%;
-    padding-left: 3%;
-}
-
 /* Tetris 表示領域 */
+/* テトリス表示領域 */
 .tetris {
-    width: 456px;
-    height: auto;
-    display: flex;
-    position: absolute;
-    top: 42.5%;
+    width: 456px; /* 24px * 12マス分 + スコア表示領域分(24px * 7マス分) */
+    height: auto; /* 高さを横幅に応じて自動調整 */
+    display: flex; /* flexを使用してLocal座標で指定できるように */
+    position: absolute; /* 座標依存せずに表示できるように */
     left: 50%;
     transform: translate(-50%,0);
     background-color: #8DAD30;
     image-rendering: pixelated;
 }
-.tetriminoNext {
-    border-left-width: 168px;
-    border-top-width: 432px;
-}
-.previewI {
-    padding-left: 15%;
-    padding-top: 24.5%;
-}
-.previewT {
-    padding-left: 15%;
-    padding-top: 40%;
-}
-.previewO {
-    padding-left: 15%;
-    padding-top: 40%;
-}
-.previewZ {
-    padding-left: 15%;
-    padding-top: 40%;
-}
-.previewS {
-    padding-left: 15%;
-    padding-top: 40%;
-}
-.previewL {
-    padding-left: 15%;
-    padding-top: 32.5%;
-}
-.previewJ {
-    padding-left: 15%;
-    padding-top: 32.5%;
-}
-
 #tetriminoScore {
     width: 168px;  /* 画像の横幅 */
     height: 432px; /* 画像の縦幅 */
@@ -133,7 +69,10 @@ table {
     height: calc(24px * 18); /* 18マス分 */
 }
 
-/* 1マスの大きさとか色(デフォルト 黒) */
+/* テトリミノ側の表示場所の大きさとか */
+.background {
+    background-color: #8DAD30;
+}
 .cellPreview {
     width: 24px;
     height: 24px;
@@ -148,11 +87,6 @@ table {
     float: left;
     background-color: #8DAD30;
 }
-.background {
-    background-color: #8DAD30;
-}
-
-/* 外側の壁用のマスの色(灰色) */
 .gameOver {
     background-image: url(../img/svg/tetris_GameOver.svg);
 }
@@ -185,6 +119,66 @@ table {
 }
 .J {
     background-image: url(../img/svg/tetris_J.svg);
+}
+
+/* スコア・レベル・ライン数の表示 */
+.scoreTitle {
+    padding-top: 13%;
+    padding-left: 3%;
+}
+#score {
+    padding-top: 11%;
+    padding-left: 3%;
+}
+.levelTitle {
+    padding-top: 25%;
+    padding-left: 3%;
+}
+#level {
+    margin-top: -2.5%;
+    padding-left: 3%;
+}
+.linesTitle {
+    padding-top: 10%;
+    padding-left: 3%;
+}
+#lines {
+    margin-top: -2.5%;
+    padding-left: 3%;
+}
+
+/* 次のテトリミノの表示 */
+.tetriminoNext {
+    border-left-width: 168px;
+    border-top-width: 432px;
+}
+.previewI {
+    padding-left: 15%;
+    padding-top: 24.5%;
+}
+.previewT {
+    padding-left: 15%;
+    padding-top: 40%;
+}
+.previewO {
+    padding-left: 15%;
+    padding-top: 40%;
+}
+.previewZ {
+    padding-left: 15%;
+    padding-top: 40%;
+}
+.previewS {
+    padding-left: 15%;
+    padding-top: 40%;
+}
+.previewL {
+    padding-left: 15%;
+    padding-top: 32.5%;
+}
+.previewJ {
+    padding-left: 15%;
+    padding-top: 32.5%;
 }
 
 /* ボタン */
