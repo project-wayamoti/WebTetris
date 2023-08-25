@@ -17,29 +17,13 @@
  * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/* HTMLの設定 */
 /* HTMLのデフォルトのマージン・パディングを無効化 */
 *{
     padding: 0;
     margin: 0;
 }
-
-/* フォントの指定 */
-/* Early GameBoy - ゲームボーイ風のフォント */
-.gbFont {
-    font-family: 'EarlyGameBoy', monospace;
-    font-size: 23px;
-    color: #1f4130;
-    image-rendering: pixelated;
-}
-/* Noto Color Emoji - 絵文字フォント */
-.emojiFont {
-    font-family: 'Noto Color Emoji', emoji;
-    font-size: 27px;
-    color: #000;
-    image-rendering: optimizeSpeed;
-}
-
-/* waya0125.com より移植 */
+/* ページ全体の設定 */
 body {
     /* フォントの指定 */
     font-family: 'M PLUS Rounded 1c', sans-serif; /* 用いるフォントの指定(指定がない場合はこれが優先される) */
@@ -58,6 +42,7 @@ body {
     line-break: normal; /* 改行方法の指定 */
     word-wrap: normal;  /* 単語の途中での改行を禁止 */
 }
+/* テーブルの設定 */
 table {
     /* 中央に寄せる */
     margin-left: auto;
@@ -66,21 +51,26 @@ table {
     border-collapse: collapse;/* collapse:セルの境界線を重ねる / separate:セルの境界線を分ける */
     border-spacing: 0;/* セルの境界線の間隔 */
 }
+
+/* フォントの設定 */
+/* Early GameBoy - ゲームボーイ風のフォント */
+.gbFont {
+    font-family: 'EarlyGameBoy', monospace;
+    font-size: 23px;
+    color: #1f4130;
+    image-rendering: pixelated;
+}
+/* Noto Color Emoji - 絵文字フォント */
+.emojiFont {
+    font-family: 'Noto Color Emoji', emoji;
+    font-size: 27px;
+    color: #000;
+    image-rendering: optimizeSpeed;
+}
+/* テキストを左寄せ */
 .text-align-left {
     text-align: left;
 }
-.text-align-right {
-    text-align: right;
-}
-.text-align-center {
-    text-align: center;
-}
-.position-center {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%,0);
-}
-/* ここまで waya0125.com からの移植・構文改変 */
 
 /* Tetris 表示領域 */
 /* テトリス表示領域 */
