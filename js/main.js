@@ -463,7 +463,8 @@ function tick() {
  */
 function loop() {
     // 一時停止中・開始前・ゲームオーバーなら動かさない
-    if(!playingState || gameOver) {
+    if(gameOver) return;
+    if(!playingState) {
         // ブロックを動かす
         blockMove();
 
