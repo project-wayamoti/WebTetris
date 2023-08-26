@@ -492,7 +492,21 @@ function loop() {
         document.getElementById("lines").textContent = lines;
         //document.getElementById("combo").textContent = combo; // 未実装
 
-        if(level < 10) if(score / 2000 > level) level++;
+        if(level < 10) if(score / 2000 > level) {
+            // レベルアップ
+            level++;
+
+            soundDelete.addEventListener('ended', (event) => {
+                // レベルアップ音の再生
+                soundLevelUp.currentTime = 0;
+                soundLevelUp.play().then(r => r).catch(e => e); // エラーを無視
+            });
+            soundDelete4Line.addEventListener('ended', (event) => {
+                // レベルアップ音の再生
+                soundLevelUp.currentTime = 0;
+                soundLevelUp.play().then(r => r).catch(e => e); // エラーを無視
+            });
+        }
     }
 
     // 1秒経過するごとに実行
@@ -609,6 +623,10 @@ soundSet.volume = 0.3;
 let soundPause = new Audio();
 soundPause.src = 'audio/tetris_Pause.ogg';
 soundPause.volume = 0.1;
+// 一時停止音
+let soundLevelUp = new Audio();
+soundLevelUp.src = 'audio/tetris_LevelUp.ogg';
+soundLevelUp.volume = 1.0;
 // ハイスコア（未実装だけどゲームオーバー後に流しておく）
 let soundHighScoreStart = new Audio();
 soundHighScoreStart.src = 'audio/tetris_HighScore_Start.ogg';
