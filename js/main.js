@@ -469,12 +469,6 @@ function nextBlockViewer() {
     d.innerHTML = s;
 }
 
-function tick() {
-    let base = 1000;
-    if(level === 1) return base;
-    base -= level * 30;
-}
-
 /**
  * メインループ
  * 1秒経過するごとに実行
