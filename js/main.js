@@ -30,7 +30,7 @@
  * もし問題があれば即座に削除しますので、ご連絡ください。 - wayamoti2015@waya0125.com
  */
 
-// ブロックの初期化（C言語の構造体のようなもの）
+/** ブロックの構造体 */
 function Block(x, y, type) {
     this.x = x;       // ブロックのx座標
     this.y = y;       // ブロックのy座標
@@ -233,8 +233,7 @@ let blocks = [
     ]
 ];
 
-/**
- * 配列コピー<br>
+/** 配列コピー<br>
  * sa:     コピー元配列<br>
  * da:     コピー先配列<br>
  * sx:     コピー元のx座標<br>
@@ -547,9 +546,10 @@ function gameOverViewer() {
         "target='_blank' rel='nofollow noopener noreferrer'><img src='img/webp/misskey_note.webp' width='80' height='20' alt='Note Button'></a>";
 }
 
-const uri1 = "テトリスもどきで%20";
-const uri2 = "%20ライン消して%20";
-const uri3 = "%20点獲得しました！";
+// テンプレート用
+const uri1 = "テトリスもどきで%20"; // タイトル
+const uri2 = "%20ライン消して%20";  // ライン数
+const uri3 = "%20点獲得しました！"; // スコア
 
 /** Twitter Share ボタンを押したときの処理 */
 // 資料1: https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview
