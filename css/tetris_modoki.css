@@ -96,16 +96,6 @@ table {
 }
 
 /* テトリミノ側の表示場所の大きさとか */
-.background {
-    background-color: #8DAD30;
-}
-.cellPreview {
-    width: 24px;
-    height: 24px;
-    display: flow;
-    float: left;
-    background-color: #8DAD30;
-}
 .cell {
     width: 24px;
     height: 24px;
