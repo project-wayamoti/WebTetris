@@ -3,11 +3,12 @@
 /* TTFフォントを読み込む - https://thinkit.co.jp/story/2011/08/18/2233 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');  /* Noto Color Emoji - https://fonts.google.com/specimen/Noto+Color+Emoji */
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap'); /* M+ Rounded 1c - https://fonts.google.com/specimen/M+PLUS+Rounded+1c */
-@font-face {
-    font-family: 'EarlyGameBoy';
+/* @font-face https://developer.mozilla.org/ja/docs/Web/CSS/@font-face */
+@font-face { /* Early GameBoy - ゲームボーイ風のフォントの設定 */
+    font-family: 'EarlyGameBoy'; /* 用いるフォントの指定 */
 
     /* Early GameBoy - https://www.dafont.com/early-gameboy.font */
-    src: url('../font/EarlyGameBoy.ttf') format('truetype');
+    src: url('../font/EarlyGameBoy.ttf') format('truetype'); /* TTFフォントの指定 */
 }
 
 /*
@@ -18,16 +19,14 @@
  */
 
 /* HTMLの設定 */
-/* HTMLのデフォルトのマージン・パディングを無効化 */
-*{
-    padding: 0;
-    margin: 0;
+*{ /* HTMLのデフォルトのマージン・パディングを無効化 */
+    padding: 0; /* パディングの無効化 */
+    margin: 0;  /* マージンの無効化 */
 }
-/* ページ全体の設定 */
-body {
+body { /* ページ全体の設定 */
     /* フォントの指定 */
     font-family: 'M PLUS Rounded 1c', sans-serif; /* 用いるフォントの指定(指定がない場合はこれが優先される) */
-    image-rendering: optimizeSpeed; /* smooth:滑らかにする / optimizeSpeed:低品質で高速 / optimizeQuality:高品質で低速 */
+    image-rendering: optimizeSpeed;               /* smooth:滑らかにする / optimizeSpeed:低品質で高速 / optimizeQuality:高品質で低速 */
 
     /* 画面配置 */
     position: relative; /* 絶対座標を使用するために必要 */
@@ -42,54 +41,52 @@ body {
     line-break: normal; /* 改行方法の指定 */
     word-wrap: normal;  /* 単語の途中での改行を禁止 */
 }
-/* テーブルの設定 */
-table {
+table { /* テーブルの設定 */
     /* 中央に寄せる */
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: auto;  /* 右のマージンを自動調整 */
+    margin-right: auto; /* 右のマージンを自動調整 */
 
-    border-collapse: collapse;/* collapse:セルの境界線を重ねる / separate:セルの境界線を分ける */
-    border-spacing: 0;/* セルの境界線の間隔 */
+    /* テーブル枠線表示設定 */
+    border-collapse: collapse; /* collapse:セルの境界線を重ねる / separate:セルの境界線を分ける */
+    border-spacing: 0;         /* セルの境界線の間隔 */
 }
 
 /* フォントの設定 */
-/* Early GameBoy - ゲームボーイ風のフォント */
-.gbFont {
-    font-family: 'EarlyGameBoy', monospace;
-    font-size: 23px;
-    color: #1f4130;
-    image-rendering: pixelated;
+.gbFont { /* Early GameBoy - ゲームボーイ風のフォント */
+    font-family: 'EarlyGameBoy', monospace; /* 用いるフォントの指定 - Early GameBoy */
+    font-size: 23px;                        /* フォントサイズの指定 */
+    color: #1f4130;                         /* フォントの色の指定 */
+    image-rendering: pixelated;             /* フォントの画質の指定 */
 }
-/* Noto Color Emoji - 絵文字フォント */
-.emojiFont {
-    font-family: 'Noto Color Emoji', emoji;
-    font-size: 27px;
-    color: #000;
-    image-rendering: optimizeSpeed;
+.emojiFont { /* Noto Color Emoji - 絵文字フォント */
+    font-family: 'Noto Color Emoji', emoji; /* 用いるフォントの指定 - Noto Color Emoji */
+    font-size: 27px;                        /* フォントサイズの指定 */
+    color: #000;                            /* フォントの色の指定 */
+    image-rendering: optimizeSpeed;         /* フォントの画質の指定 */
 }
 /* テキストを左寄せ */
 .text-align-left {
-    text-align: left;
+    text-align: left; /* 左寄せ */
 }
 
 /* Tetris 表示領域 */
 /* テトリス表示領域 */
-.tetris {
-    width: 456px; /* 24px * 12マス分 + スコア表示領域分(24px * 7マス分) */
-    height: auto; /* 高さを横幅に応じて自動調整 */
-    display: flex; /* flexを使用してLocal座標で指定できるように */
-    position: absolute; /* 座標依存せずに表示できるように */
-    left: 50%;
-    transform: translate(-50%,0);
-    background-color: #8DAD30;
-    image-rendering: pixelated;
+.tetris { /* テトリス表示領域の大きさとか */
+    width: 456px;                 /* 24px * 12マス分 + スコア表示領域分(24px * 7マス分) */
+    height: auto;                 /* 高さを横幅に応じて自動調整 */
+    display: flex;                /* flexを使用してLocal座標で指定できるように */
+    position: absolute;           /* 座標依存せずに表示できるように */
+    left: 50%;                    /* 左端を右に寄せる */
+    transform: translate(-50%,0); /* translateで左に寄せる */
+    background-color: #8DAD30;    /* 背景色の指定 */
+    image-rendering: pixelated;   /* 画質の指定 */
 }
-#tetriminoScore {
-    width: 168px;  /* 画像の横幅 */
-    height: 432px; /* 画像の縦幅 */
-    background-image: url(../img/png/tetris_Status.png);
+#tetriminoScore { /* テトリスのスコア表示領域 */
+    width: 168px;                                        /* 画像の横幅 */
+    height: 432px;                                       /* 画像の縦幅 */
+    background-image: url(../img/png/tetris_Status.png); /* 画像の指定 - テトリスのステータス画面 */
 }
-#tetriminoDraw {
+#tetriminoDraw { /* テトリスゲーム本体の表示領域 */
     display: block;          /* ﾃﾄﾘﾐﾉ一個ごとに改行 */
     width: calc(24px * 12);  /* 12マス分 */
     height: calc(24px * 18); /* 18マス分 */
@@ -97,143 +94,135 @@ table {
 
 /* テトリミノ側の表示場所の大きさとか */
 .cell {
-    width: 24px;
-    height: 24px;
-    display: block;
-    float: left;
-    background-color: #8DAD30;
+    width: 24px;               /* 24px = 1マス分 */
+    height: 24px;              /* 24px = 1マス分 */
+    display: block;            /* 設置時に改行（横並び防止）を設定するために必要 */
+    float: left;               /* 左寄せ */
+    background-color: #8DAD30; /* 背景色の指定 - 特に設定されていなければこの色が映る */
 }
-.gameOver {
-    background-image: url(../img/svg/tetris_GameOver.svg);
+.gameOver { /* ゲームオーバー時に埋め尽くすブロック */
+    background-image: url(../img/svg/tetris_GameOver.svg); /* 画像の指定 - ゲームオーバー時に埋め尽くすブロックの画像 */
 }
-.wall1 {
-    background-image: url(../img/svg/tetris_Block1.svg);
+.wall1 { /* 壁の画像 */
+    background-image: url(../img/svg/tetris_Block1.svg); /* 画像の指定 - 壁の画像（ループ1） */
 }
-.wall2 {
-    background-image: url(../img/svg/tetris_Block2.svg);
+.wall2 { /* 壁の画像 */
+    background-image: url(../img/svg/tetris_Block2.svg); /* 画像の指定 - 壁の画像（ループ2） */
 }
-.wall3 {
-    background-image: url(../img/svg/tetris_Block3.svg);
+.wall3 { /* 壁の画像 */
+    background-image: url(../img/svg/tetris_Block3.svg); /* 画像の指定 - 壁の画像（ループ3） */
 }
-.I {
-    background-image: url(../img/svg/tetris_I.svg);
+.I { /* テトリミノIの画像 */
+    background-image: url(../img/svg/tetris_I.svg); /* 画像の指定 - テトリミノの画像（I） */
 }
-.T {
-    background-image: url(../img/svg/tetris_T.svg);
+.T { /* テトリミノTの画像 */
+    background-image: url(../img/svg/tetris_T.svg); /* 画像の指定 - テトリミノの画像（T） */
 }
-.O {
-    background-image: url(../img/svg/tetris_O.svg);
+.O { /* テトリミノOの画像 */
+    background-image: url(../img/svg/tetris_O.svg); /* 画像の指定 - テトリミノの画像（O） */
 }
-.Z {
-    background-image: url(../img/svg/tetris_Z.svg);
+.Z { /* テトリミノZの画像 */
+    background-image: url(../img/svg/tetris_Z.svg); /* 画像の指定 - テトリミノの画像（Z） */
 }
-.S {
-    background-image: url(../img/svg/tetris_S.svg);
+.S { /* テトリミノSの画像 */
+    background-image: url(../img/svg/tetris_S.svg); /* 画像の指定 - テトリミノの画像（S） */
 }
-.L {
-    background-image: url(../img/svg/tetris_L.svg);
+.L { /* テトリミノLの画像 */
+    background-image: url(../img/svg/tetris_L.svg); /* 画像の指定 - テトリミノの画像（L） */
 }
-.J {
-    background-image: url(../img/svg/tetris_J.svg);
+.J { /* テトリミノJの画像 */
+    background-image: url(../img/svg/tetris_J.svg); /* 画像の指定 - テトリミノの画像（J） */
 }
 
 /* スコア・レベル・ライン数の表示 */
-.scoreTitle {
-    padding-top: 13%;
-    padding-left: 3%;
+.scoreTitle { /* スコアのタイトル */
+    padding-top: 13%; /* 上の余白（原点基準で画面比率で相対位置調整） */
+    padding-left: 3%; /* 左の余白（原点基準で画面比率で相対位置調整） */
 }
-#score {
-    padding-top: 11%;
-    padding-left: 3%;
+#score { /* スコア */
+    padding-top: 11%; /* 上の余白（原点基準で画面比率で相対位置調整） */
+    padding-left: 3%; /* 左の余白（原点基準で画面比率で相対位置調整） */
 }
-.levelTitle {
-    padding-top: 25%;
-    padding-left: 3%;
+.levelTitle { /* レベルのタイトル */
+    padding-top: 25%; /* 上の余白（原点基準で画面比率で相対位置調整） */
+    padding-left: 3%; /* 左の余白（原点基準で画面比率で相対位置調整） */
 }
-#level {
-    margin-top: -2.5%;
-    padding-left: 3%;
+#level { /* レベル */
+    margin-top: -2.5%; /* 上の余白（原点基準で画面比率で相対位置調整） */
+    padding-left: 3%;  /* 左の余白（原点基準で画面比率で相対位置調整） */
 }
-.linesTitle {
-    padding-top: 10%;
-    padding-left: 3%;
+.linesTitle { /* ライン数のタイトル */
+    padding-top: 10%; /* 上の余白（原点基準で画面比率で相対位置調整） */
+    padding-left: 3%; /* 左の余白（原点基準で画面比率で相対位置調整） */
 }
-#lines {
-    margin-top: -2.5%;
-    padding-left: 3%;
+#lines { /* ライン数 */
+    margin-top: -2.5%; /* 上の余白（原点基準で画面比率で相対位置調整） */
+    padding-left: 3%;  /* 左の余白（原点基準で画面比率で相対位置調整） */
 }
 
 /* 次のテトリミノの表示 */
-.tetriminoNext {
-    border-left-width: 168px;
-    border-top-width: 432px;
+.tetriminoNext { /* 次のテトリミノの表示領域 */
+    border-left-width: 168px; /* 画像の横幅 */
+    border-top-width: 432px;  /* 画像の縦幅 */
 }
 .previewI {
-    padding-left: 15%;
-    padding-top: 24.5%;
+    padding-top: 24.5%; /* 上の余白（原点基準で画面比率で相対位置調整） */
+    padding-left: 15%;  /* 左の余白（原点基準で画面比率で相対位置調整） */
 }
 .previewT {
-    padding-left: 15%;
-    padding-top: 40%;
+    padding-top: 40%;  /* 上の余白（原点基準で画面比率で相対位置調整） */
+    padding-left: 15%; /* 左の余白（原点基準で画面比率で相対位置調整） */
 }
 .previewO {
-    padding-left: 15%;
-    padding-top: 40%;
+    padding-top: 40%;  /* 上の余白（原点基準で画面比率で相対位置調整） */
+    padding-left: 15%; /* 左の余白（原点基準で画面比率で相対位置調整） */
 }
 .previewZ {
-    padding-left: 15%;
-    padding-top: 40%;
+    padding-top: 40%;  /* 上の余白（原点基準で画面比率で相対位置調整） */
+    padding-left: 15%; /* 左の余白（原点基準で画面比率で相対位置調整） */
 }
 .previewS {
-    padding-left: 15%;
-    padding-top: 40%;
+    padding-top: 40%;  /* 上の余白（原点基準で画面比率で相対位置調整） */
+    padding-left: 15%; /* 左の余白（原点基準で画面比率で相対位置調整） */
 }
 .previewL {
-    padding-left: 15%;
-    padding-top: 32.5%;
+    padding-top: 32.5%; /* 上の余白（原点基準で画面比率で相対位置調整） */
+    padding-left: 15%;  /* 左の余白（原点基準で画面比率で相対位置調整） */
 }
 .previewJ {
-    padding-left: 15%;
-    padding-top: 32.5%;
+    padding-top: 32.5%; /* 上の余白（原点基準で画面比率で相対位置調整） */
+    padding-left: 15%;  /* 左の余白（原点基準で画面比率で相対位置調整） */
 }
 
 /* ボタン */
-[id*="buttons"] {
-    padding-top: 450px;
+[id*="buttons"] { /* IDに一致するものだけに適用 */
+    padding-top: 450px; /* 上の余白（原点基準でマジックナンバーで位置調整） */
 }
-#playing, #rotate, #left, #up, #right, #down {
-    display: inline-grid;
-    width: 42px;
-    height: 42px;
+#playing, #rotate, #left, #up, #right, #down { /* ボタンの大きさ */
+    display: inline-grid; /* グリッドを使用して並列にボタンを配置する */
+    width: 42px;          /* ボタンの横幅 */
+    height: 42px;         /* ボタンの縦幅 */
 }
 /* ここまで Tetris 表示領域 */
 
 /* モバイル端末用の設定 */
-/* 画面の横幅が480px以下の場合に適用される */
-@media screen and (max-width: 480px) {
-    /* テトリス表示領域
-     * scaleを使って縮小し、originで基準を変更することでズレを解消する
-     */
-    .tetris {
-        transform: scale(80%);
-        transform-origin: -200% 0;
+@media screen and (max-width: 480px) { /* 画面の横幅が480px以下の場合に適用される */
+    .tetris { /* テトリス表示領域 scaleを使って縮小し、originで基準を変更することでズレを解消する */
+        transform: scale(80%);     /* 480px * 80% = 384px */
+        transform-origin: -200% 0; /* https://developer.mozilla.org/ja/docs/Web/CSS/transform-origin */
     }
-    [id*="buttons"] {
-        padding-top: 360px;
+    [id*="buttons"] { /* IDに一致するものだけに適用 */
+        padding-top: 360px; /* 上の余白（原点基準でマジックナンバーで位置調整） */
     }
 }
-/* 画面の横幅が360px以下の場合に適用される */
-@media screen and (max-width: 360px) {
-    /* テトリス表示領域
-     * scaleを使って縮小し、originで基準を変更することでズレを解消する
-     */
-    .tetris {
-        transform: scale(60%);
-        transform-origin: -75% 0;
+@media screen and (max-width: 360px) { /* 画面の横幅が360px以下の場合に適用される */
+    .tetris { /* テトリス表示領域 scaleを使って縮小し、originで基準を変更することでズレを解消する */
+        transform: scale(60%);    /* 360px * 60% = 216px */
+        transform-origin: -75% 0; /* https://developer.mozilla.org/ja/docs/Web/CSS/transform-origin */
     }
-    [id*="buttons"] {
-        padding-top: 270px;
-        padding-bottom: 5px;
+    [id*="buttons"] { /* IDに一致するものだけに適用 */
+        padding-top: 270px;  /* 上の余白（原点基準でマジックナンバーで位置調整） */
+        padding-bottom: 5px; /* 下の余白（原点基準でマジックナンバーで位置調整） */
     }
 }
 /* ここまで モバイル端末用の設定 */

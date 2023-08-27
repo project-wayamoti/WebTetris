@@ -27,88 +27,53 @@
         <meta property="og:image" content="img/png/GameBoyModoki.png">
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 
-        <!-- CSS -->
+        <!-- テトリス表示用 CSS -->
         <link rel="stylesheet" href="css/tetris_modoki.css">
     </head>
     <body>
-        <h1>README</h1>
+        <!-- タイトル・概要 -->
+        <h1>テトリスもどき</h1>
         <p>テトリスのようなゲームです。</p>
         <p>※ 最初のブロックだけ表示されません ※</p>
-
-        <h1>操作方法</h1>
-        <table>
-            <tr>
-                <th>キー</th>
-                <th>操作</th>
-            </tr>
-            <tr>
-                <td>A/←</td>
-                <td class="text-align-left">左移動</td>
-            </tr>
-            <tr>
-                <td>D/→</td>
-                <td class="text-align-left">右移動</td>
-            </tr>
-            <tr>
-                <td>S/↓</td>
-                <td class="text-align-left">ソフトドロップ</td>
-            </tr>
-            <tr>
-                <td>W/Space</td>
-                <td class="text-align-left">ハードドロップ</td>
-            </tr>
-            <tr>
-                <td>Q/Z</td>
-                <td class="text-align-left">左回転</td>
-            </tr>
-            <tr>
-                <td>E/↑</td>
-                <td class="text-align-left">右回転</td>
-            </tr>
-            <tr>
-                <td>ESC</td>
-                <td class="text-align-left">一時停止</td>
-            </tr>
-        </table>
-        詳細は <a href="README.html">README</a> を参照
+        <p>操作説明・その他情報は <a href="README.html">こちら</a></p>
 
         <br>
 
         <!-- ステータス表示 -->
-        <h2>ゲームの状態</h2>
-        <div id="playingState">停止中</div>
+        <h2>ゲームの状態</h2>               <!-- ゲームの状態 タイトル -->
+        <div id="playingState">停止中</div> <!-- ゲームの状態 ステートメント（書き込み待ち受け用） -->
 
         <!-- ゲームクリア時に表示 -->
-        <a class="twitter-share-button"></a>
-        <div id="shareTwitter"></div>
-        <div id="shareMisskey"></div>
+        <div id="shareTwitter"></div> <!-- Twitter共有ボタン -->
+        <div id="shareMisskey"></div> <!-- Misskey共有ボタン -->
 
         <br>
 
         <!-- テトリミノ表示 -->
-        <div class="tetris">
-            <div id="tetriminoDraw"></div>
-            <div id="tetriminoScore">
-                <div class="scoreTitle gbFont">SCORE</div>
-                <div id="score" class="gbFont">0</div>
-                <div class="levelTitle gbFont">LEVEL</div>
-                <div id="level" class="gbFont">1</div>
-                <div class="linesTitle gbFont">LINES</div>
-                <div id="lines" class="gbFont">0</div>
-                <div id="nextBlockViewer"></div>
+        <div class="tetris">                               <!-- テトリミノ表示枠 -->
+            <div id="tetriminoDraw"></div>                 <!-- テトリミノ表示 -->
+            <div id="tetriminoScore">                      <!-- スコア表示 -->
+                <div class="scoreTitle gbFont">SCORE</div> <!-- スコア表示 タイトル -->
+                <div id="score" class="gbFont">0</div>     <!-- スコア表示 スコア数値 -->
+                <div class="levelTitle gbFont">LEVEL</div> <!-- レベル表示 タイトル -->
+                <div id="level" class="gbFont">1</div>     <!-- レベル表示 レベル数値 -->
+                <div class="linesTitle gbFont">LINES</div> <!-- 消去ライン表示 タイトル -->
+                <div id="lines" class="gbFont">0</div>     <!-- 消去ライン表示 消去ライン数値 -->
+                <div id="nextBlockViewer"></div>           <!-- 次のブロック表示 -->
             </div>
         </div>
 
         <!-- テトリミノ操作ボタン (スマホ用) -->
-        <div id="buttons">
-            <input type="button" class="emojiFont" id="playing" value="⏯">
-            <input type="button" class="emojiFont" id="rotate" value="🔁">
-            <input type="button" class="emojiFont" id="left" value="←">
-            <input type="button" class="emojiFont" id="up" value="↑">
-            <input type="button" class="emojiFont" id="right" value="→">
-            <input type="button" class="emojiFont" id="down" value="↓">
+        <div id="buttons">                                                 <!-- テトリミノ操作ボタン枠 -->
+            <input type="button" class="emojiFont" id="playing" value="⏯"> <!-- ゲームの状態 スタート・ストップ -->
+            <input type="button" class="emojiFont" id="rotate" value="🔁"> <!-- テトリミノ操作 回転 -->
+            <input type="button" class="emojiFont" id="left" value="←">    <!-- テトリミノ操作 左移動 -->
+            <input type="button" class="emojiFont" id="up" value="↑">      <!-- テトリミノ操作 上移動 -->
+            <input type="button" class="emojiFont" id="right" value="→">   <!-- テトリミノ操作 右移動 -->
+            <input type="button" class="emojiFont" id="down" value="↓">    <!-- テトリミノ操作 下移動 -->
         </div>
 
+        <!-- テトリス表示用 JavaScript -->
         <script src="js/main.js"></script>
     </body>
 </html>
